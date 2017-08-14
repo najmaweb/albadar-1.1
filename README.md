@@ -1,5 +1,9 @@
 # Al Badar v 1.1
 
+
+
+[![N|Solid](https://raw.githubusercontent.com/najmaweb/albadar-1.1/master/albadar-logo.png)](https://raw.githubusercontent.com/najmaweb/albadar-1.1/master/albadar-logo.png)
+
 Daftar Fitur Dasar:
 
  * Menyimpan transaksi Pembayaran Sekolah (SPP, Bimbel, Daftar Ulang, Penerimaan Siswa Baru, Buku)
