@@ -1,0 +1,24 @@
+.red{
+    color:red
+}
+.head .xright{
+    float: right;
+}
+.bimbel label{
+    color: black;
+}
+.rightaligned{
+    text-align: right;
+}
+.centeraligned{
+    text-align: center;
+}
+.leftaligned{
+    text-align: left;
+}
+.table thead th{
+    text-align:center;
+}
+.form-horizontal .control-label.center{
+    text-align: center;
+}

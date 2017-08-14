@@ -1,0 +1,13 @@
+<script type="text/javascript" src="/assets/js/jquery-2.0.3.min.js"></script>
+<script type="text/javascript" src="/assets/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/assets/js/twitter-bootstrap-hover-dropdown.min.js"></script>
+<script type="text/javascript" src="/assets/js/bootstrap-admin-theme-change-size.js"></script>
+<script type="text/javascript" src="/assets/vendors/uniform/jquery.uniform.min.js"></script>
+<script type="text/javascript" src="/assets/vendors/chosen.jquery.min.js"></script>
+<script type="text/javascript" src="/assets/vendors/selectize/dist/js/standalone/selectize.min.js"></script>
+<script type="text/javascript" src="/assets/vendors/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<script type="text/javascript" src="/assets/vendors/bootstrap-wysihtml5-rails-b3/vendor/assets/javascripts/bootstrap-wysihtml5/wysihtml5.js"></script>
+<script type="text/javascript" src="/assets/vendors/bootstrap-wysihtml5-rails-b3/vendor/assets/javascripts/bootstrap-wysihtml5/core-b3.js"></script>
+<script type="text/javascript" src="/assets/vendors/twitter-bootstrap-wizard/jquery.bootstrap.wizard-for.bootstrap3.js"></script>
+<script type="text/javascript" src="/assets/vendors/boostrap3-typeahead/bootstrap3-typeahead.min.js"></script>
+<script type="text/javascript" src="/assets/vendors/easypiechart/jquery.easy-pie-chart.js"></script>

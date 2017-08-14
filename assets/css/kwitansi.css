@@ -1,0 +1,47 @@
+table#rpt thead tr td{
+    padding-bottom: 20px;
+    font-size:40px;
+    text-align: center;    
+}
+table#rpt thead tr td.single{
+    padding-bottom: 0px;
+}
+table#rpt thead tr td.leftaligned{
+    text-align: left;
+}    
+.line{
+    border: 1px solid black;
+}
+table#rpt thead tr td.image{
+    padding-left:0px;
+    padding-right:0px;
+    text-align: left;
+} 
+#terbilang{
+    border: 1px solid black;
+    padding-left: 5px;
+}
+table#rpt thead td.smalltext{
+    font-size: 16px;
+}
+table#rpt thead td#nokwitansi{
+    font-size:16px;
+}
+table#rpt tbody tr td.leftaligned{
+    text-align: left;
+}   
+table#rpt tbody tr td.rightaligned{
+    text-align: right;
+}   
+table#rpt tbody tr td.centeraligned{
+    text-align: center;
+}   
+table#rpt tbody tr td.bold{
+    font-weight: bold;
+}   
+table#rpt tbody tr td.number{
+    padding-right: 15px;
+}
+table#rpt thead #identity td{
+    font-size: 10px;
+}

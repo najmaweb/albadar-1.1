@@ -1,0 +1,15 @@
+#err_message{
+    color: red;
+}
+.pointer{
+    cursor:pointer;
+}
+.info{
+    padding: 2px 3px 2px 3px;
+    background: pink;
+    color: yellow;
+}
+.info:hover{
+    background: red;
+    color: white;
+}

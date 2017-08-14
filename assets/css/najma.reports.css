@@ -1,0 +1,45 @@
+h1,h2,h3{
+    text-align: center;
+}
+.commonreport{
+    width: 100%;
+    padding:0px 40px 0px 40px;
+    font-family: arial;
+}
+.commonreport thead tr th{
+    border: 1px solid black;
+}
+.commonreport tbody tr td{
+    padding: 10px;
+    border-bottom: solid 1px black;
+    font-size: 16px;
+}
+.number{
+    text-align: right;
+    padding-right: 5px;
+}
+.center{
+    text-align: center;
+}
+.commonreport tfoot tr td{
+    padding: 10px;
+    border-bottom: solid 1px black;
+    font-weight: normal;
+}
+.topnavcenter{
+    text-align: center;
+}
+tr.subtotal{
+    display: table-row;
+}
+tr.subtotal td{
+    border-top: black 2px solid;
+    font-style: italic;
+    margin-bottom: 13px;
+    padding-bottom: 13px;
+}
+tr.subhead1 td{
+    font-style: italic;
+    font-weight: bold;
+    border-bottom: black solid 3px;
+}

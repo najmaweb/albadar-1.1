@@ -1,0 +1,55 @@
+<?php
+class Receipts extends CI_Controller{
+    function __construct(){
+        parent::__construct();
+        $this->load->model("Receipt");
+        $this->load->helper("terbilang");
+        $this->load->helper("datetime");
+    }
+    function create(){
+        $this->load->model("Receipt");
+        echo $this->Receipt->create();
+    }
+    function getmax(){
+        $this->load->model("Receipt");
+        echo $this->Receipt->getmax(date("m"));
+    }
+    function index(){
+        session_start();
+        $data = array(
+            "title"=>"Daftar Kwitansi",
+            "feedData"=>"receipts",
+            "role"=>"1",
+            "objs"=>$this->Receipt->getreceipts()
+        );
+        $this->load->view("receipts/index",$data);
+    }
+    function previewkwitansi(){
+        session_start();
+        $id = $this->uri->segment(3);
+        $receipt = $this->Receipt->getreceipt($id);
+        $data = array(
+            "nis"=>$receipt->nis,
+            "sppfrstmonth"=>"","sppnextmonth"=>"",
+            "sppfrstyear"=>"","sppnextyear"=>"",
+            "spp"=>$receipt->spp,"bimbel"=>$receipt->bimbel,
+            "bimbelfrstyear"=>"","bimbelfrstmonth"=>"",
+            "bimbelnextyear"=>"","bimbelnextmonth"=>"",
+            "psb"=>$receipt->psb,"book"=>$receipt->book,
+            "orispp"=>"","oribimbel"=>"","sppcheckbox"=>"",
+            "grade"=>$receipt->grade,"topaid"=>0,"total"=>0,
+            "receiptno"=>$receipt->receiptno,
+            "monthsarray"=>getmontharray("01","2017","03","2017"),
+            "studentname"=>$receipt->name,
+        );
+        $this->load->view("receipts/previewkwitansi",$data);
+    }
+    function kwitansi(){
+        session_start();
+        $this->load->view("receipts/kwitansi");
+    }
+    function save(){
+        $this->load->model("Receipt");
+        echo $this->Receipt->save();
+    }
+}
