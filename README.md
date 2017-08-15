@@ -2,7 +2,7 @@
 
 
 
-[![N|Solid](https://raw.githubusercontent.com/najmaweb/albadar-1.1/master/albadar-logo.png)](https://raw.githubusercontent.com/najmaweb/albadar-1.1/master/albadar-logo.png)
+[![Al Badar](https://raw.githubusercontent.com/najmaweb/albadar-1.1/master/albadar-logo.png)](https://raw.githubusercontent.com/najmaweb/albadar-1.1/master/albadar-logo.png)
 
 Daftar Fitur Dasar:
 
