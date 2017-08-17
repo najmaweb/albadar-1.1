@@ -10,17 +10,20 @@ class Simulator extends CI_Controller{
     function index(){
         $nis = $this->uri->segment(3);
         $payment = new Payment($nis);
-        $sppmaxyearmonth = $this->Mcashier->getsppmaxyearmonth($nis);
+        $sppmaxyearmonth = $this->Payment->getsppmaxyearmonth();
+        $sppremain=$payment->getsppremain();
+        $cursppbill = $payment->getcurrmonthsppbill();
         echo "Bulan Tahun sekarang " . date("m-Y") . $this->crlf;
-        echo "Name " . $payment->getname() . $this->crlf;
-        echo "Pembayaran SPP Terakhir " 
+        echo "NAMA " . $payment->getname() . $this->crlf;
+        echo "PEMBAYARAN SPP TERAKHIR " 
             . $sppmaxyearmonth["maxmonth"] 
             . "-" 
             . $sppmaxyearmonth["maxyear"] 
-            . $this->crlf;
-        $lastspppayment = $payment->getlastspppayment();
-        echo "Last Month " . $lastspppayment["maxmonth"] . $this->crlf;
-        echo "Last Year " . $lastspppayment["maxyear"] . $this->crlf;
-        echo "Curr spp bill " . $payment->getcurrmonthsppbill();
+            . "(".$sppmaxyearmonth["status"].")" . $this->crlf;
+        echo "SISA SPP SEBELUMNYA " . $sppremain["sppremain"] . $this->crlf;
+        echo "SPP BULAN INI " . $cursppbill . $this->crlf;
+        echo "TOTAL TAGIHAN SPP " .( $cursppbill + $sppremain["sppremain"]) . $this->crlf;
+        echo "BANYAKNYA BULAN SPP TERTANGGUNG " . $sppremain["monthcount"] . " BULAN" . $this->crlf;
+        echo "STATUS SPP " . $sppremain["status"] . $this->crlf;
     }
 }

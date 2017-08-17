@@ -5,6 +5,7 @@ class Payment extends CI_Model{
     function __construct($nis = null){
         parent::__construct();
         $this->ci = & get_instance();
+        $this->load->helper("datetime");
         $this->nis = $nis;
     }
     function getname(){
@@ -52,6 +53,58 @@ class Payment extends CI_Model{
         }
         return array(
             "maxmonth"=>$res[0]->pmonth,"maxyear"=>$res[0]->pyear
+        );
+    }
+    function getsppmaxyearmonth(){
+        $thisyear = $this->Setting->getcurrentyear();
+        $initmonth = $this->Setting->getinitmonth();
+        $COMMENT = "LAST PAYMENT IS MONTH BEFORE INITMONTH";
+        if($initmonth==="01"){
+            $initmonth="12";
+            $inityear = $thisyear - 1;
+        }else{
+            $initmonth = addzero($initmonth - 1);
+            $inityear = $thisyear;
+        }
+        $sql = "select ";
+        $sql.= "case when mpyear is null then '".$inityear."' else mpyear end mpyear, ";
+        $sql.= "case when mpmonth is null then '".$initmonth."' else mpmonth end mpmonth, ";
+        $sql.= "case when mpmonth is null then 'Belum bayar' else 'Sudah bayar' end paymentstatus ";
+        $sql.= "from ";
+        $sql.= "(select max(pyear)mpyear,max(pmonth)mpmonth from spp where nis='".$this->nis."' ) X ";
+        $ci = & get_instance();
+        $res = $ci->db->query($sql);
+        $out = $res->result();
+        return array(
+            "maxyear"=>$out[0]->mpyear,
+            "maxmonth"=>$out[0]->mpmonth,
+            "status"=>$out[0]->paymentstatus,
+        );
+    }
+    function getsppremain(){
+        $comment = "MENAMPILKAN SISA TANGGUNGAN.";
+        $comment.= "DIHITUNG DARI BULAN SEBELUM SAAT INI HINGGA TERAKHIR DILAKUKAN PEMBAYARAN";
+        $sppamount = $this->getsppamount();
+        $lastspppayment = $this->getsppmaxyearmonth();
+        if(date("Y")===$lastspppayment["maxyear"]){
+            if((date("m") - 1)<=$lastspppayment["maxmonth"]){
+                $status = "TIDAK ADA SISA TANGGUNGAN";
+                $monthcount = 0;
+            }elseif((date("m") - 1)>$lastspppayment["maxmonth"]){
+                $status = "ADA KEKURANGAN DI TAHUN YANG SAMA";
+                $monthcount = (date("m") - 1) - $lastspppayment["maxmonth"];
+            }
+        }elseif(date("Y")>$lastspppayment["maxyear"]){
+            $yearcount = date("Y") - $lastspppayment["maxyear"];
+            $premonths = 12 - $lastspppayment["maxmonth"];
+            $postmonths = date("m") - 1;
+            $status = "ADA KEKURANGAN DI TAHUN YANG BERBEDA";
+            $monthcount = 12*$yearcount+$premonths+$postmonths;
+        }
+        return array(
+            "sppremain"=>$sppamount*$monthcount,
+            "monthcount"=>$monthcount,
+            "status"=>$status,"comment"=>$comment
         );
     }
 }
