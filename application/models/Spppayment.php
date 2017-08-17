@@ -1,5 +1,5 @@
 <?php
-class Payment extends CI_Model{
+class Spppayment extends CI_Model{
     public $nis;
     public $ci;
     function __construct($nis = null){

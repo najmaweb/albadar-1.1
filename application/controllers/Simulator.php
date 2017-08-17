@@ -4,13 +4,13 @@ class Simulator extends CI_Controller{
     function __construct(){
         parent::__construct();
         $this->load->model("Mcashier");
-        $this->load->model("Payment");
+        $this->load->model("Spppayment");
         $this->crlf = "<br />";
     }
     function index(){
         $nis = $this->uri->segment(3);
-        $payment = new Payment($nis);
-        $sppmaxyearmonth = $this->Payment->getsppmaxyearmonth();
+        $payment = new Spppayment($nis);
+        $sppmaxyearmonth = $this->Spppayment->getsppmaxyearmonth();
         $sppremain=$payment->getsppremain();
         $cursppbill = $payment->getcurrmonthsppbill();
         echo "Bulan Tahun sekarang " . date("m-Y") . $this->crlf;
