@@ -89,4 +89,8 @@ class Tester extends CI_Controller{
         echo $this->Mcashier->getbimbelmaxyearmonth($this->uri->segment(3))["maxyear"] . "<br />";
         echo $this->Mcashier->getbimbelmaxyearmonth($this->uri->segment(3))["maxmonth"];
     }
+    function testterbilang(){
+        $bil = $this->uri->segment(3);
+        echo terbilang($bil);
+    }
 }

@@ -6,6 +6,7 @@ function add_trailing_zero($num,$limit=5){
     return $num;
 }
 function terbilang($params){
+    $thousandfactor =  substr($params,strlen($params)-6,3);
     $str = "";
     $no_se = array(2,5,8);
     $with_satu = array(1,4,7);
@@ -60,7 +61,9 @@ function terbilang($params){
                 }
                 break;
                 case 4:
-                $str.= " ribu";
+                if($thousandfactor!="000"){
+                    $str.= " ribu";
+                }
                 break;
                 case 5:
                 if(!$belas){
