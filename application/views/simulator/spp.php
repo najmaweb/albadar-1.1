@@ -126,7 +126,7 @@
                                                 <input type="text" disabled="disabled" id="returnmoney" name="returnmoney" class="form-control" value="0">
                                             </div>
                                         </div>
-                                        <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                                        <button type="submit" class="btn btn-primary">Preview Kwitansi</button>
                                         <button type="reset" class="btn btn-default">Batalkan</button>
                                     </fieldset>
                                 </div>

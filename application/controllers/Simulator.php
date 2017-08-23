@@ -8,10 +8,10 @@ class Simulator extends CI_Controller{
         $this->load->model("Bimbelpayment");
         $this->load->model("Dupsbpayment");
         $this->load->model("Bukupayment");
+        $this->load->model("Receipt");
         $this->crlf = "<br />";
     }
-    function index(){
-        checklogin();
+    function attr(){
         $nis = $this->uri->segment(3);
         $payment = new Spppayment($nis);
         $sppmaxyearmonth = $this->Spppayment->getsppmaxyearmonth();
@@ -61,8 +61,47 @@ class Simulator extends CI_Controller{
         echo "KEKURANGAN BUKU ".$buku->getbukuremain() . $this->crlf;
 
     }
-    function previewkwitansi(){
+    function kwitansi(){
+        session_start();
         checklogin();
+        $params = array(
+            //"allpaid"=>$_SESSION["allpaid"],
+            "sppfrstmonth"=>$_SESSION["sppfrstmonth"],
+            "sppfrstyear"=>$_SESSION["sppfrstyear"],
+            "sppnextmonth"=>$_SESSION["sppnextmonth"],
+            "sppnextyear"=>$_SESSION["sppnextyear"],
+            "nis"=>$_SESSION["nis"],
+            "studentname"=>$_SESSION["studentname"],
+            "spp"=>$_SESSION["spp"],
+            "bimbelfrstyear"=>$_SESSION["bimbelfrstyear"],
+            "bimbelfrstmonth"=>$_SESSION["bimbelfrstmonth"],
+            "bimbelnextmonth"=>$_SESSION["bimbelnextmonth"],
+            "bimbelnextyear"=>$_SESSION["bimbelnextyear"],
+            "psb"=>$_SESSION["psb"],
+            "book"=>$_SESSION["book"],
+            "grade"=>$_SESSION["grade"],
+            //"cashpay"=>$_SESSION["cashpay"],
+            "dupsbremain"=>$_SESSION["dupsbremain"],
+            //"dupsbpaid"=>$_SESSION["dupsbpaid"],
+            "bookpaymentremain"=>$_SESSION["bookpaymentremain"],
+            //"bookpaymentpaid"=>$_SESSION["bookpaymentpaid"],
+            "totaltagihan"=>$_SESSION["totaltagihan"],
+            "bimbel"=>$_SESSION["bimbel"],
+            "total"=>$_SESSION["total"],
+            "sppmonthcount"=>$_SESSION["sppmonthcount"],
+            "bimbelmonthcount"=>$_SESSION["bimbelmonthcount"],
+            "monthsarray"=>$this->dates->getmonthsarray(),
+            "role"=>$this->User->getrole($_SESSION["userid"]),
+            "periodmonths"=>getperiodmonths(),
+            //"tagihanremain"=>$_SESSION["tagihanremain"],
+            "sppremain"=>$_SESSION["sppremain"],
+            "bimbelremain"=>$_SESSION["bimbelremain"],
+            "kwitansi"=>$_SESSION["receiptno"]
+        );
+        $params["topaid"] = $_SESSION["total"];
+        $this->load->view("simulator/kwitansi",$params);        
+    }
+    function previewkwitansi(){
         session_start();
         $this->load->view("simulator/previewkwitansi");
     }
@@ -73,8 +112,14 @@ class Simulator extends CI_Controller{
         $out.= " - " . $_SESSION["sppnextyear"];
         return $out;
     }
+    function processbimbelstring(){
+        $out = "Pembayaran Bimbel bulan " . $_SESSION["bimbelfrstmonth"];
+        $out.= "-" . $_SESSION["bimbelfrstyear"];
+        $out.= " s/d " . $_SESSION["bimbelnextmonth"];
+        $out.= " - " . $_SESSION["bimbelnextyear"];
+        return $out;
+    }
     function savesession(){
-        checklogin();
         $params = $this->input->post();
         foreach($params as $key=>$val){
             echo $key . " -> " . $val . $this->crlf;
@@ -102,45 +147,47 @@ class Simulator extends CI_Controller{
         $_SESSION["nis"]=$params["nis"];
         $_SESSION["spp"] = $params["spp"];
         $_SESSION["bimbel"]="";
-        $_SESSION["bimbelfrstyear"]="";
-        $_SESSION["bimbelfrstmonth"]="";
-        $_SESSION["bimbelnextyear"]="";
-        $_SESSION["bimbelnextmonth"]="";
+        $_SESSION["bimbelfrstyear"]=$params["bimbelfrstyear"];;
+        $_SESSION["bimbelfrstmonth"]=$params["bimbelfrstmonth"];
+        $_SESSION["bimbelnextyear"]=$params["bimbelnextyear"];
+        $_SESSION["bimbelnextmonth"]=$params["bimbelnextmonth"];
         $_SESSION["psb"] = removedot($params["psb"]);
         $_SESSION["book"] = removedot($params["book"]);
         $_SESSION["orispp"]="";
         $_SESSION["oribimbel"]="";
         $_SESSION["grade"]="";
-        $_SESSION["total"] = $_SESSION["psb"]+$_SESSION["spp"]+$_SESSION["book"]+$_SESSION["bimbel"];
-        $_SESSION["topaid"] = $_SESSION["total"];
-        if($params["sppcheckbox"]){
+        if(isset($params["sppcheckbox"])){
             $_SESSION["withspp"] = true;
             $_SESSION["spp"] = removedot($params["spp"]);
         }else{
             $_SESSION["withspp"] = false;
             $_SESSION["spp"] = 0;
         }
-        if($params["bimbelcheckbox"]){
+        if(isset($params["bimbelcheckbox"])){
             $_SESSION["withbimbel"] = true;
             $_SESSION["bimbel"] = removedot($params["bimbel"]);
         }else{
             $_SESSION["withbimbel"] = false;
             $_SESSION["bimbel"] = 0;
         }
-        $_SESSION["withbimbel"] = "";
+        $_SESSION["total"] = $_SESSION["psb"]+$_SESSION["spp"]+$_SESSION["book"]+$_SESSION["bimbel"];
+        $_SESSION["topaid"] = $_SESSION["total"];
         $_SESSION["totaltagihan"] = "0";
         $_SESSION["sppremain"] = $sppremain["sppremain"];
-        $_SESSION["bimbelremain"] = "0";
+        $_SESSION["bimbelremain"] = $bimbelremain["bimbelremain"];
         $_SESSION["dupsbremain"] = "0";
         $_SESSION["bookpaymentremain"] = "0";
         $_SESSION["periodmonths"] = getperiodmonths();
         $_SESSION["spptext"] = $this->processsppstring();
+        $_SESSION["bimbeltext"] = $this->processbimbelstring();
         $_SESSION["username"] = $_SESSION["username"];
+        $_SESSION["sppmonthcount"] = $this->getsppmonthcount();
+        $_SESSION["bimbelmonthcount"] = $this->getbimbelmonthcount();
+        echo $_SESSION["username"] . $this->crlf;
         echo "SPP Text" . $_SESSION["spptext"] . $this->crlf;
     }
-    function spp(){
+    function index(){
         session_start();
-        checklogin();
         $this->load->helper("form");
         $data = array(
             "breadcrumb" => array(1=>"Pembayaran",2=>"SPP"),
@@ -151,7 +198,54 @@ class Simulator extends CI_Controller{
             "curmonth"=>date('m'),
             "curyear"=>date("Y"),
             "err_message"=>"",
-            "role"=>$this->User->getrole($_SESSION["userid"]),
+            "role"=>1,
         );
-        $this->load->view("simulator/spp",$data);    }
+        $this->load->view("simulator/spp",$data);    
+    }
+    function getsppmonthcount(){
+        $sppmonthcount = 1;
+        if($_SESSION["sppfrstyear"] === $_SESSION["sppnextyear"]){
+            $sppmonthcount += $_SESSION["sppnextmonth"] - $_SESSION["sppfrstmonth"];
+        }
+        if($_SESSION["sppnextyear"] < $_SESSION["sppfrstyear"]){
+            $firstyearmonthcount = 12 - $_SESSION["sppfrstmonth"];
+            $yearcount = $_SESSION["sppnextyear"] - $_SESSION["sppfrstyear"];
+            $lastyearmonthcount = $_SESSION["sppnextmonth"]; 
+            $sppmonthcount += $firstyearmonthcount + 12*$yearcount + $lastyearmonthcount;
+        }
+        return $sppmonthcount;
+    }
+    function getbimbelmonthcount(){
+        $bimbelmonthcount = 1;
+        if($_SESSION["bimbelfrstyear"] === $_SESSION["bimbelnextyear"]){
+            $bimbelmonthcount += $_SESSION["bimbelnextmonth"] - $_SESSION["bimbelfrstmonth"];
+        }
+        if($_SESSION["bimbelnextyear"] < $_SESSION["bimbelfrstyear"]){
+            $firstyearmonthcount = 12 - $_SESSION["bimbelfrstmonth"];
+            $yearcount =$_SESSION["bimbelnextyear"] - $_SESSION["bimbelfrstyear"];
+            $lastyearmonthcount = $_SESSION["bimbelnextmonth"]; 
+            $bimbelmonthcount += $firstyearmonthcount + 12*$yearcount + $lastyearmonthcount;
+        }
+        return $bimbelmonthcount;
+    }
+    function saveall(){
+        session_start();
+        $receiptno = $this->Receipt->save($_SESSION["nis"],date("Y"));
+        $_SESSION["receiptno"] = $receiptno;
+        $montharray = getmontharray($_SESSION["sppfrstmonth"],$_SESSION["sppfrstyear"],$_SESSION["sppnextmonth"],$_SESSION["sppnextyear"]);
+        foreach($montharray as $monthyear){
+            $month = substr($monthyear,0,2);
+            $year = substr($monthyear,2,4);
+            $purpose = "Untuk pembayaran SPP bulan " . $month . '/' . $year;
+            $description = "Untuk pembayaran SPP bulan " . $month . '/' . $year;
+            $this->Spppayment->save($_SESSION["nis"],$receiptno,$_SESSION["spp"],$year,$month,$this->Setting->getcurrentyear(),$purpose,$description,$_SESSION["username"]);
+        }
+        $payment = new Spppayment($_SESSION["nis"]);
+        $spp = $payment->getsppamount();
+        $sppamount = $spp*count($montharray);
+        $payment->savedetail($receiptno,$this->processsppstring(),$sppamount);
+    //    $this->Bimbelpayment->save();
+    //    $this->Dupsbpayment->save();
+    //    $this->Bukupayment->save();
+    }
 }

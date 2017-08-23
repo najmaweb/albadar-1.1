@@ -61,7 +61,7 @@ function terbilang($params){
                 }
                 break;
                 case 4:
-                if($thousandfactor!="000"){
+                if($thousandfactor!=="000"){
                     $str.= " ribu";
                 }
                 break;

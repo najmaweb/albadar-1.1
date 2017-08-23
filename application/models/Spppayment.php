@@ -86,6 +86,8 @@ class Spppayment extends CI_Model{
         $comment.= "DIHITUNG DARI BULAN SEBELUM SAAT INI HINGGA TERAKHIR DILAKUKAN PEMBAYARAN";
         $sppamount = $this->getsppamount();
         $lastspppayment = $this->getsppmaxyearmonth();
+        $monthcount = 0;
+        $status = "TIDAK ADA SISA TANGGUNGAN";
         if(date("Y")===$lastspppayment["maxyear"]){
             if((date("m") - 1)<=$lastspppayment["maxmonth"]){
                 $status = "TIDAK ADA SISA TANGGUNGAN";
@@ -106,5 +108,29 @@ class Spppayment extends CI_Model{
             "monthcount"=>$monthcount,
             "status"=>$status,"comment"=>$comment
         );
+    }
+    function save($nis,$receiptno,$amount,$pyear,$pmonth,$cyear,$purpose,$description,$createuser){
+        $sql = "insert into spp ";
+        $sql.= "(nis,receiptno,amount,pyear,pmonth,cyear,purpose,description,createuser) ";
+        $sql.= "values ";
+        $sql.= "(";
+        $sql.= "'".$nis."',";
+        $sql.= "'".$receiptno."',";
+        $sql.= "'".$amount."',";
+        $sql.= "'".$pyear."',";
+        $sql.= "'".$pmonth."',";
+        $sql.= "'".$cyear."',";
+        $sql.= "'".$purpose."',";
+        $sql.= "'".$description."',";
+        $sql.= "'".$createuser."'";
+        $sql.= ")";
+        $this->ci->db->query($sql);
+    }
+    function savedetail($receiptno,$description,$amount){
+        $sql = "insert into receiptdetails ";
+        $sql.= "(receiptno,description,amount,createuser) ";
+        $sql.= "values ";
+        $sql.= "('".$receiptno."','".$description."','".$amount."','".$_SESSION["username"]."') ";
+        $this->ci->db->query($sql);
     }
 }

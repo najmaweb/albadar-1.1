@@ -1,7 +1,7 @@
 <html>
 <head>
-<link rel="stylesheet" media="screen" href="/assets/css/bootstrap.min.css">
-<link rel="stylesheet" media="screen" href="/assets/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" media="screen" href="/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" media="screen" href="/assets/css/bootstrap-theme.min.css">
     <script type="text/javascript" src="/assets/js/jquery-2.0.3.min.js"></script>
     <link rel="stylesheet" href="/assets/css/kwitansi.css" />
 </head>
@@ -140,7 +140,7 @@
                 <tr><td>&nbsp;</td><td class="rightaligned number"></td><td colspan=2>&nbsp;</td><td class="centeraligned"><?php echo $_SESSION["username"];?></td><td></td></tr>
             </tbody>
         </table>
-        <script type="text/javascript" src="/assets/js/previewkwitansi.js"></script>
+        <script type="text/javascript" src="/assets/js/simulatorpreviewkwitansi.js"></script>
     </div>
 </body>
 </html>
