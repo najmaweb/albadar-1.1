@@ -119,6 +119,10 @@ class Simulator extends CI_Controller{
         $out.= " - " . $_SESSION["bimbelnextyear"];
         return $out;
     }
+    function processstring($subject){
+        $out = "Pembayaran " . $subject . " ";
+        return $out;
+    }
     function savesession(){
         $params = $this->input->post();
         foreach($params as $key=>$val){
@@ -137,7 +141,9 @@ class Simulator extends CI_Controller{
         $curbimbelbill = $bimbel->getcurrmonthbimbelbill();
 
         $dupsb = new Dupsbpayment($nis);
+        $dupsbremain = $dupsb->getdupsbremain();
         $buku = new Bukupayment($nis);
+        $bookpayment = $buku->getbukuremain();
         session_start();
         $_SESSION["sppfrstmonth"] = $params["sppfrstmonth"];
         $_SESSION["studentname"] = $params["studentname"];
@@ -170,16 +176,44 @@ class Simulator extends CI_Controller{
             $_SESSION["withbimbel"] = false;
             $_SESSION["bimbel"] = 0;
         }
+
+        if(isset($params["dupsbcheckbox"])){
+            if(removedot($params["psb"])>0){
+                $_SESSION["withdupsb"] = true;
+                $_SESSION["psb"] = removedot($params["psb"]);
+            }else{
+                $_SESSION["withdupsb"] = false;
+                $_SESSION["psb"] = 0;                
+            }
+        }else{
+            $_SESSION["withdupsb"] = false;
+            $_SESSION["psb"] = 0;
+        }
+        if(isset($params["bukucheckbox"])){
+            if(removedot($params["book"])>0){
+                $_SESSION["withbuku"] = true;
+                $_SESSION["buku"] = removedot($params["book"]);
+            }else{
+                $_SESSION["withbuku"] = false;
+                $_SESSION["buku"] = 0;                
+            }
+        }else{
+            $_SESSION["withbuku"] = false;
+            $_SESSION["book"] = 0;
+        }
+
         $_SESSION["total"] = $_SESSION["psb"]+$_SESSION["spp"]+$_SESSION["book"]+$_SESSION["bimbel"];
         $_SESSION["topaid"] = $_SESSION["total"];
         $_SESSION["totaltagihan"] = "0";
         $_SESSION["sppremain"] = $sppremain["sppremain"];
         $_SESSION["bimbelremain"] = $bimbelremain["bimbelremain"];
-        $_SESSION["dupsbremain"] = "0";
-        $_SESSION["bookpaymentremain"] = "0";
+        $_SESSION["dupsbremain"] = $dupsbremain;
+        $_SESSION["bookpaymentremain"] = $bookpayment;
         $_SESSION["periodmonths"] = getperiodmonths();
         $_SESSION["spptext"] = $this->processsppstring();
         $_SESSION["bimbeltext"] = $this->processbimbelstring();
+        $_SESSION["booktext"] = $this->processstring("buku");
+        $_SESSION["dupsbtext"] = $this->processstring("DU / PSB");
         $_SESSION["username"] = $_SESSION["username"];
         $_SESSION["sppmonthcount"] = $this->getsppmonthcount();
         $_SESSION["bimbelmonthcount"] = $this->getbimbelmonthcount();

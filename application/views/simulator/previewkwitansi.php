@@ -53,12 +53,12 @@
                 <?php 
                 $counter++;
                 }?>
-                <?php if($_SESSION["book"]){?>
+                <?php if($_SESSION["withbuku"]){?>
                 <tr><td class="centeraligned number"><?php echo $counter;?></td><td colspan=3>Buku</td><td colspan=2 class="rightaligned number"><?php echo  "Rp. " . number_format($_SESSION["book"]);?></td></tr>
                 <?php 
                 $counter++;
                 }?>
-                <?php if($_SESSION["psb"]){?>
+                <?php if($_SESSION["withdupsb"]){?>
                 <tr><td class="centeraligned number"><?php echo $counter;?></td><td colspan=3>PSB</td>
                 <td colspan=2 class="rightaligned number"><?php echo  "Rp. " . number_format($_SESSION["psb"]);?></td>
                 </tr>
@@ -106,7 +106,7 @@
                 </tr>
                 <tr>
                     <td>Sisa Tagihan DU/PSB</td>
-                    <td class="rightaligned number"><?php echo  "Rp. " . number_format($_SESSION["dupsbremain"]);?></td>
+                    <td class="rightaligned number"><?php echo  "Rp. " . number_format($_SESSION["dupsbremain"]-$_SESSION["psb"]);?></td>
                     <td colspan=2>&nbsp;</td>
                     <td></td>
                     <td></td>
@@ -122,7 +122,7 @@
                 <tr>
                     <td>Total Sisa Tagihan</td>
                     <td class="rightaligned number">
-                        <?php echo  "Rp. " . number_format($_SESSION["sppremain"]+$_SESSION["bimbelremain"]+$_SESSION["dupsbremain"]+$_SESSION["bookpaymentremain"]);?>
+                        <?php echo  "Rp. " . number_format($_SESSION["sppremain"]+$_SESSION["bimbelremain"]+$_SESSION["dupsbremain"]+$_SESSION["bookpaymentremain"]-$_SESSION["book"]-$_SESSION["psb"]);?>
                     </td>
                     <td colspan=2></td>
                     <td></td>

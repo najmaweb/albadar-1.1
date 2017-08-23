@@ -9,6 +9,15 @@ class Dupsbpayment extends CI_Model{
         $this->ci = & get_instance();
         $this->year = $this->Setting->getcurrentyear();
     }
+    function islunas(){
+        $sql = "select sum(amount) amount from dupsb where nis='".$this->nis."' ";
+        $que = $this->ci->db->query($sql);
+        $res = $que->result();
+        if($res->amount===$this->getdupsb()){
+            return true;
+        }
+        return false;
+    }
     function getdupsb(){
         $sql = "select b.amount from studentshistory a ";
         $sql.= "left outer join dupsbgroups b on b.id=a.dupsbgroup_id ";
