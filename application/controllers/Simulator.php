@@ -222,6 +222,7 @@ class Simulator extends CI_Controller{
     }
     function index(){
         session_start();
+        checklogin();
         $this->load->helper("form");
         $data = array(
             "breadcrumb" => array(1=>"Pembayaran",2=>"SPP"),
@@ -234,7 +235,7 @@ class Simulator extends CI_Controller{
             "err_message"=>"",
             "role"=>1,
         );
-        $this->load->view("simulator/spp",$data);    
+        $this->load->view("simulator/spp",$data);
     }
     function getsppmonthcount(){
         $sppmonthcount = 1;
