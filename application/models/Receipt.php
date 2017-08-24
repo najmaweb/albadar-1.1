@@ -1,12 +1,13 @@
 <?php
 class Receipt extends CI_Model{
+    var $ci;
     function __construct(){
         parent::__construct();
+        $this->ci = & get_instance();
     }
     function getmax($month){
-        $ci = & get_instance();
         $sql = "select lpad(max(rorder)+1,4,'0') maxnum from receipts where month(createdate)='".$month."'";
-        $que = $ci->db->query($sql);
+        $que = $this->ci->db->query($sql);
         $res = $que->result();
         if(is_null($res[0]->maxnum)){
             return '0001';
@@ -17,12 +18,11 @@ class Receipt extends CI_Model{
         return "EL/".date("y")."/".date("m")."/".$this->getmax(date("m"));
     }
     function save($nis,$year){
-        $ci = & get_instance();
         $receiptno = $this->create();
         $sql = "insert into receipts (receiptno,rorder,nis,year,createuser) ";
         $sql.= "values ";
         $sql.= "('".$receiptno."','".$this->getmax(date("m"))."','".$nis."','".$year."','puji') ";
-        $que = $ci->db->query($sql);
+        $que = $this->ci->db->query($sql);
         return $receiptno;
     }
     function getreceipt($id){
@@ -37,15 +37,19 @@ class Receipt extends CI_Model{
         $sql.= "left outer join bookpayment f on f.nis=a.nis and f.year=a.year ";
         $sql.= "left outer join grades g on g.id=b.grade_id ";
         $sql.= "where a.id = '" . $id . "'";
-        $ci = & get_instance();
-        $que = $ci->db->query($sql);
+        $que = $this->ci->db->query($sql);
         return $que->result()[0];
+    }
+    function getreceiptdetails($receiptno){
+        $sql = "select id,receiptno,description,amount from receiptdetails ";
+        $sql.= "where receiptno='".$receiptno."'";
+        $que = $this->ci->db->query($sql);
+        return $que->result();
     }
     function getreceipts(){
         $sql = "select a.id,receiptno,b.name,a.nis,a.year,a.createuser from receipts a ";
         $sql.= "left outer join studentshistory b on a.nis=b.nis and b.year=a.year ";
-        $ci = & get_instance();
-        $que = $ci->db->query($sql);
+        $que = $this->ci->db->query($sql);
         return $que->result();
     }
 }

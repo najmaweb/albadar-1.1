@@ -59,27 +59,10 @@
 
                 <tr><td class="line" colspan=6></td</tr>
                 <?php $counter = 1;?>
-                <?php if($spp){?>
+                <?php foreach($receiptdetails as $detail){?>
                 <tr>
                     <td class="centeraligned number"><?php echo $counter;?></td>
-                    <td colspan=3>SPP <?php echo $monthsarray[$sppfrstmonth] . " " . $sppfrstyear?> - <?php echo $monthsarray[$sppnextmonth] . " " . $sppnextyear;?> (<?php echo $sppmonthcount?> bulan)</td><td colspan=2 class="rightaligned number"><?php echo  "Rp. " . number_format($spp);?></td>
-                </tr>
-                <?php 
-                $counter++;
-                }?>
-                <?php if($bimbel){?>
-                <tr><td class="centeraligned number"><?php echo $counter;?></td><td colspan=3>Bimbel <?php echo $monthsarray[$bimbelfrstmonth] . " " . $bimbelfrstyear?> - <?php echo $monthsarray[$bimbelnextmonth] . " " . $bimbelnextyear;?> (<?php echo $bimbelmonthcount?> bulan)</td><td colspan=2 class="rightaligned number"><?php echo  "Rp. " . number_format($bimbel);?></td></tr>
-                <?php 
-                $counter++;
-                }?>
-                <?php if($book){?>
-                <tr><td class="centeraligned number"><?php echo $counter;?></td><td colspan=3>Buku</td><td colspan=2 class="rightaligned number"><?php echo  "Rp. " . number_format($book);?></td></tr>
-                <?php 
-                $counter++;
-                }?>
-                <?php if($psb){?>
-                <tr><td class="centeraligned number"><?php echo $counter;?></td><td colspan=3>PSB</td>
-                <td colspan=2 class="rightaligned number"><?php echo  "Rp. " . number_format($psb);?></td>
+                    <td colspan=3><?php echo $detail->description;?></td><td colspan=2 class="rightaligned number"><?php echo  "Rp. " . number_format($detail->amount);?></td>
                 </tr>
                 <?php }?>
                 <tr><td colspan=2>&nbsp;</td><td colspan=2>&nbsp;</td><td colspan=2>&nbsp;</td></tr>

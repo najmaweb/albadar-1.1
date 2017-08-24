@@ -39,8 +39,15 @@ class Receipts extends CI_Controller{
             "orispp"=>"","oribimbel"=>"","sppcheckbox"=>"",
             "grade"=>$receipt->grade,"topaid"=>0,"total"=>0,
             "receiptno"=>$receipt->receiptno,
+            "receiptdetails"=>$this->Receipt->getreceiptdetails($receipt->receiptno),
             "monthsarray"=>getmontharray("01","2017","03","2017"),
             "studentname"=>$receipt->name,
+            "totaltagihan"=>0,
+            "sppremain"=>0,
+            "bimbelremain"=>0,
+            "dupsbremain"=>0,
+            "bookpaymentremain"=>0,
+            "periodmonths" => getperiodmonths()
         );
         $this->load->view("receipts/previewkwitansi",$data);
     }
