@@ -68,7 +68,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="col-lg-3 control-label" for="psb">DU/PSB&nbsp;<input type="checkbox" id="dupsbcheckbox" name="dupsbcheckbox" checked="checked"></label>
+                                            <label class="col-lg-3 control-label" for="psb">DU/PSB&nbsp;</label>
                                             <div class="col-lg-4">
                                                 <input type="text" id="psb" name="psb"  class="form-control affect-total formatted" value="0" data-toggle="tooltip" title="Selalu menampilkan sisa tagihan DU/PSB">
                                                 <input type="hidden" id="psb_" name="psb_"  class="form-control affect-total" value="0">
@@ -76,7 +76,7 @@
                                             <div class="col-lg-5"></div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="col-lg-3 control-label" for="book">Buku&nbsp;<input type="checkbox" id="bukucheckbox" name="bukucheckbox" checked="checked"></label>
+                                            <label class="col-lg-3 control-label" for="book">Buku&nbsp;</label>
                                             <div class="col-lg-9">
                                                 <input type="text" id="book" name="book"  class="form-control affect-total formatted" value="0">
                                             </div>
@@ -126,7 +126,7 @@
                                                 <input type="text" disabled="disabled" id="returnmoney" name="returnmoney" class="form-control" value="0">
                                             </div>
                                         </div>
-                                        <button type="submit" class="btn btn-primary">Preview Kwitansi</button>
+                                        <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
                                         <button type="reset" class="btn btn-default">Batalkan</button>
                                     </fieldset>
                                 </div>

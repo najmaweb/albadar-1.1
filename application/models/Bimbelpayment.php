@@ -107,4 +107,22 @@ class Bimbelpayment extends CI_Model{
             "status"=>$status,"comment"=>$comment
         );
     }
+    function save($nis,$receiptno,$amount,$pyear,$pmonth,$cyear,$paymenttype,$purpose,$description,$createuser){
+        $sql = "insert into bimbel ";
+        $sql.= "(nis,receiptno,amount,pyear,pmonth,cyear,paymenttype,purpose,description,createuser) ";
+        $sql.= "values ";
+        $sql.= "(";
+        $sql.= "'".$nis."',";
+        $sql.= "'".$receiptno."',";
+        $sql.= "'".$amount."',";
+        $sql.= "'".$pyear."',";
+        $sql.= "'".$pmonth."',";
+        $sql.= "'".$cmonth."',";
+        $sql.= "'".$paymenttype."',";
+        $sql.= "'".$purpose."',";
+        $sql.= "'".$description."',";
+        $sql.= "'".$createuser."'";
+        $sql.= ")";
+        $this->ci->db->query($sql);
+    }
 }

@@ -1,13 +1,13 @@
 $("#btngotocashier").click(function(){
-    window.location.href = "/simulator/";
+    window.location.href = "/cashier/";
 });
 $("#btnprint").click(function(){
     $.ajax({
-        url:'/simulator/saveall',
+        url:'/cashier/saveall',
     })
     .done(function(res){
         console.log("Success save transaction",res);
-        window.location.href = "/simulator/kwitansi"
+        window.location.href = "/cashier/kwitansi"
     })
     .fail(function(err){
         alert("Err saveall"+err);

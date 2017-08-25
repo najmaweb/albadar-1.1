@@ -1,2 +1,2 @@
 window.print();
-window.location.href = "/simulator/index";
+window.location.href = "/cashier/index";

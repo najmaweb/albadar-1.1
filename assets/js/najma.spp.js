@@ -132,16 +132,16 @@ $.ajax({
                     $("#psb_").val(numberWithCommas(res.dupsbremain));
                     $("#psb").val(numberWithCommas(res.dupsbremain));
                     if(res.dupsbremain==="0"){
-                        $("#psb").attr("disabled","disabled");
+                        $("#psb").attr("readonly",true);
                     }else{
-                        $("#psb").removeAttr("disabled");
+                        $("#psb").removeAttr("readonly");
                     }
                     $("#book_").val(numberWithCommas(res.bookremain));
                     $("#book").val(numberWithCommas(res.bookremain));
                     if(res.bookremain==="0"){
-                        $("#book").attr("disabled","disabled");
+                        $("#book").attr("readonly",true);
                     }else{
-                        $("#book").removeAttr("disabled");
+                        $("#book").removeAttr("readonly");
                     }
                     $("#sppfrstmonth").val(res.sppmaxmonth);
                     $("#sppfrstyear").val(res.sppmaxyear);

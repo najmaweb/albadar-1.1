@@ -35,4 +35,20 @@ class Bukupayment extends CI_Model{
     function getbukuremain(){
         return $this->getbuku() - $this->getbukupaid();
     }
+    function save($nis,$receiptno,$amount,$year,$paymenttype,$purpose,$description,$createuser){
+        $sql = "insert into bookpayment ";
+        $sql.= "(nis,receiptno,amount,year,paymenttype,purpose,description,createuser) ";
+        $sql.= "values ";
+        $sql.= "(";
+        $sql.= "'".$nis."',";
+        $sql.= "'".$receiptno."',";
+        $sql.= "'".$amount."',";
+        $sql.= "'".$year."',";
+        $sql.= "'".$paymenttype."',";
+        $sql.= "'".$purpose."',";
+        $sql.= "'".$description."',";
+        $sql.= "'".$createuser."'";
+        $sql.= ")";
+        $this->ci->db->query($sql);
+    }
 }

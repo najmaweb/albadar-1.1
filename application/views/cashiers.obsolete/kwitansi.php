@@ -99,7 +99,7 @@
                 </tr>
                 <tr>
                     <td>Sisa Tagihan DU/PSB</td>
-                    <td class="rightaligned number"><?php echo  "Rp. " . number_format($dupsbremain-$psb);?></td>
+                    <td class="rightaligned number"><?php echo  "Rp. " . number_format($dupsbremain);?></td>
                     <td colspan=2>&nbsp;</td>
                     <td></td>
                     <td></td>
@@ -129,6 +129,6 @@
                 <tr><td>&nbsp;</td><td class="rightaligned number"></td><td>&nbsp;</td><td colspan=2 class="centeraligned"><?php echo humanize($_SESSION["username"]);?></td><td></td></tr>
     </tbody>
 </table>
-<script type="text/javascript" src="/assets/js/simulatorkwitansi.js"></script>
+<script type="text/javascript" src="/assets/js/kwitansi.js"></script>
 </body>
 </html>

@@ -44,4 +44,20 @@ class Dupsbpayment extends CI_Model{
     function getdupsbremain(){
         return $this->getdupsb() - $this->getdupsbpaid();
     }
+    function save($nis,$receiptno,$amount,$year,$paymenttype,$purpose,$description,$createuser){
+        $sql = "insert into dupsb ";
+        $sql.= "(nis,receiptno,amount,year,paymenttype,purpose,description,createuser) ";
+        $sql.= "values ";
+        $sql.= "(";
+        $sql.= "'".$nis."',";
+        $sql.= "'".$receiptno."',";
+        $sql.= "'".$amount."',";
+        $sql.= "'".$year."',";
+        $sql.= "'".$paymenttype."',";
+        $sql.= "'".$purpose."',";
+        $sql.= "'".$description."',";
+        $sql.= "'".$createuser."'";
+        $sql.= ")";
+        $this->ci->db->query($sql);
+    }
 }
