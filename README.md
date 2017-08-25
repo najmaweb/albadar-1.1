@@ -15,5 +15,14 @@ Daftar Fitur Dasar:
  * Menampilkan Laporan Tanggungan Siswa
  * Cetak Ulang Kwitansi
 
-email: puji@najma.web.id
+Kebutuhan Dasar Server:
 
+ * Apache Web Server 
+ * PHP Server
+ * MySQL Server
+
+Kebutuhan Dasar Klien:
+
+* Mozilla Firefox v 47 atau Chrome v 54
+
+email: puji@najma.web.id
