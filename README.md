@@ -6,6 +6,7 @@
 
 Daftar Fitur Dasar:
 
+ * Berbasiskan web Klien - Server
  * Menyimpan transaksi Pembayaran Sekolah (SPP, Bimbel, Daftar Ulang, Penerimaan Siswa Baru, Buku)
  * Menampilkan Rekap Laporan Transaksi Per Petugas
  * Menampilkan Rekap Laporan Pembayaran SPP
