@@ -17,16 +17,16 @@ class Receipt extends CI_Model{
     function create(){
         return "EL/".date("y")."/".date("m")."/".$this->getmax(date("m"));
     }
-    function save($nis,$year){
+    function save($nis,$amount,$year){
         $receiptno = $this->create();
-        $sql = "insert into receipts (receiptno,rorder,nis,year,createuser) ";
+        $sql = "insert into receipts (receiptno,rorder,nis,amount,year,createuser) ";
         $sql.= "values ";
-        $sql.= "('".$receiptno."','".$this->getmax(date("m"))."','".$nis."','".$year."','puji') ";
+        $sql.= "('".$receiptno."','".$this->getmax(date("m"))."','".$nis."','".$amount."','".$year."','puji') ";
         $que = $this->ci->db->query($sql);
         return $receiptno;
     }
     function getreceipt($id){
-        $sql = "select a.id,a.receiptno,b.name,a.nis,a.year,";
+        $sql = "select a.id,a.receiptno,a.amount total,b.name,a.nis,a.year,";
         $sql.= "a.createuser,c.amount spp,d.amount bimbel,";
         $sql.= "e.amount psb,f.amount book,g.name grade ";
         $sql.= "from receipts a ";

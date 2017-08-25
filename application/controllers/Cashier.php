@@ -227,8 +227,12 @@ class Cashier extends CI_Controller{
         $_SESSION["username"] = $_SESSION["username"];
         $_SESSION["sppmonthcount"] = $this->getsppmonthcount();
         $_SESSION["bimbelmonthcount"] = $this->getbimbelmonthcount();
-        echo $_SESSION["username"] . $this->crlf;
-        echo "SPP Text" . $_SESSION["spptext"] . $this->crlf;
+        $DEBUG = false;
+        if($DEBUG){
+            echo $_SESSION["username"] . $this->crlf;
+            echo "SPP Text" . $_SESSION["spptext"] . $this->crlf;
+        }
+        redirect("../../cashier/previewkwitansi");
     }
     function index(){
         session_start();
@@ -275,7 +279,7 @@ class Cashier extends CI_Controller{
     }
     function saveall(){
         session_start();
-        $receiptno = $this->Receipt->save($_SESSION["nis"],date("Y"));
+        $receiptno = $this->Receipt->save($_SESSION["nis"],$_SESSION["total"],date("Y"));
         $_SESSION["receiptno"] = $receiptno;
         $montharray = getmontharray($_SESSION["sppfrstmonth"],$_SESSION["sppfrstyear"],$_SESSION["sppnextmonth"],$_SESSION["sppnextyear"]);
         $bimbelmontharray = getmontharray($_SESSION["bimbelfrstmonth"],$_SESSION["bimbelfrstyear"],$_SESSION["bimbelnextmonth"],$_SESSION["bimbelnextyear"]);

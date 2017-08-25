@@ -29,7 +29,7 @@
         <input type="hidden" id="orispp" value="<?php echo $orispp;?>">
         <input type="hidden" id="oribimbel" value="<?php echo $oribimbel;?>">
         <input type="hidden" id="sppcheckbox" value="<?php echo $sppcheckbox;?>">
-
+        <script>receiptid=<?php echo $receiptid;?></script>
         <table id="rpt" width=100%>
             <thead>
                 <tr><td width="16%"></td><td width="16%"></td><td width="16%"></td><td width="16%"></td><td width="16%"></td><td width="16%"></td></tr>
@@ -52,7 +52,7 @@
             <tbody>
                 <tr><td class="line" colspan=6></td</tr>
                 <tr><td>Telah terima dari</td><td>: <?php echo substr($studentname,0,15);?> - <?php echo $grade;?></td><td id="terbilang" rowspan="2" colspan="4"><?php echo humanize(terbilang((string) $total)) . " Rupiah";?></td></tr>
-                <tr><td>Sejumlah Uang</td><td>: <?php echo "Rp. " .  number_format($topaid);?></td></tr>
+                <tr><td>Sejumlah Uang</td><td>: <?php echo "Rp. " .  number_format($total);?></td></tr>
                 <tr><td class="line" colspan=6></td</tr>
 
                 <tr><td class="centeraligned bold">No</td><td colspan=3 class="centeraligned  bold">Keterangan</td><td colspan=2 class="centeraligned bold">Jumlah</td></tr>
@@ -142,7 +142,7 @@
                 <tr><td>&nbsp;</td><td class="rightaligned number"></td><td colspan=2>&nbsp;</td><td class="centeraligned"><?php echo $_SESSION["username"];?></td><td></td></tr>
             </tbody>
         </table>
-        <script type="text/javascript" src="/assets/js/previewkwitansi.js"></script>
+        <script type="text/javascript" src="/assets/js/receiptpreviewkwitansi.js"></script>
     </div>
 </body>
 </html>

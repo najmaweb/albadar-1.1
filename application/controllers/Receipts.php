@@ -37,7 +37,35 @@ class Receipts extends CI_Controller{
             "bimbelnextyear"=>"","bimbelnextmonth"=>"",
             "psb"=>$receipt->psb,"book"=>$receipt->book,
             "orispp"=>"","oribimbel"=>"","sppcheckbox"=>"",
-            "grade"=>$receipt->grade,"topaid"=>0,"total"=>0,
+            "grade"=>$receipt->grade,"topaid"=>0,"total"=>$receipt->total,
+            "receiptno"=>$receipt->receiptno,
+            "receiptdetails"=>$this->Receipt->getreceiptdetails($receipt->receiptno),
+            "monthsarray"=>getmontharray("01","2017","03","2017"),
+            "studentname"=>$receipt->name,
+            "totaltagihan"=>0,
+            "sppremain"=>0,
+            "bimbelremain"=>0,
+            "dupsbremain"=>0,
+            "bookpaymentremain"=>0,
+            "periodmonths" => getperiodmonths(),
+            "receiptid"=>$id,
+        );
+        $this->load->view("receipts/previewkwitansi",$data);
+    }
+    function kwitansi(){
+        session_start();
+        $id = $this->uri->segment(3);
+        $receipt = $this->Receipt->getreceipt($id);
+        $data = array(
+            "nis"=>$receipt->nis,
+            "sppfrstmonth"=>"","sppnextmonth"=>"",
+            "sppfrstyear"=>"","sppnextyear"=>"",
+            "spp"=>$receipt->spp,"bimbel"=>$receipt->bimbel,
+            "bimbelfrstyear"=>"","bimbelfrstmonth"=>"",
+            "bimbelnextyear"=>"","bimbelnextmonth"=>"",
+            "psb"=>$receipt->psb,"book"=>$receipt->book,
+            "orispp"=>"","oribimbel"=>"","sppcheckbox"=>"",
+            "grade"=>$receipt->grade,"topaid"=>0,"total"=>$receipt->total,
             "receiptno"=>$receipt->receiptno,
             "receiptdetails"=>$this->Receipt->getreceiptdetails($receipt->receiptno),
             "monthsarray"=>getmontharray("01","2017","03","2017"),
@@ -49,11 +77,7 @@ class Receipts extends CI_Controller{
             "bookpaymentremain"=>0,
             "periodmonths" => getperiodmonths()
         );
-        $this->load->view("receipts/previewkwitansi",$data);
-    }
-    function kwitansi(){
-        session_start();
-        $this->load->view("receipts/kwitansi");
+        $this->load->view("receipts/kwitansi",$data);
     }
     function save(){
         $this->load->model("Receipt");

@@ -115,7 +115,7 @@
                 <tr>
                     <td>Total Sisa Tagihan</td>
                     <td class="rightaligned number">
-                        <?php echo  "Rp. " . number_format($sppremain+$bimbelremain+$dupsbremain+$bookpaymentremain);?>
+                        <?php echo  "Rp. " . number_format($sppremain+$bimbelremain+$dupsbremain+$bookpaymentremain-$book-$psb);?>
                     </td>
                     <td colspan=2></td>
                     <td></td>

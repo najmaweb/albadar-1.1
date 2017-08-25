@@ -25,6 +25,9 @@
         <li class="<?php echo ($feedData==='cashier')?'active':'';?>">
             <a href="/cashier"><i class="glyphicon glyphicon-chevron-right"></i> Pembayaran</a>
         </li>
+        <li class="<?php echo ($feedData==='receipts')?'active':'';?>">
+            <a href="/receipts"><i class="glyphicon glyphicon-chevron-right"></i> Kwitansi</a>
+        </li>
         <li class="<?php echo ($feedData==='report')?'active':'';?>">
             <a href="/reports/index"><i class="glyphicon glyphicon-chevron-right"></i> Laporan</a>
         </li>
