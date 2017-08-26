@@ -22,10 +22,10 @@
                         <div class="col-lg-12">
                             <div class="page-header bootstrap-admin-content-title">
                                 <h1>Tentang Aplikasi AlBadar</h1>
-                                <a href="https://github.com/najmaweb/albadar" class="action btn">
+                                <a href="https://github.com/najmaweb/albadar-1.1" class="action btn">
                                     Go to GitHub &raquo;
                                 </a>
-                                <a href="https://github.com/najmaweb/albadar/archive/master.zip" class="action">
+                                <a href="https://github.com/najmaweb/albadar-1.1/archive/master.zip" class="action">
                                     <button class="btn btn-success">Download (.zip)</button>
                                 </a>
                             </div>
@@ -40,9 +40,9 @@
                                 </div>
                                 <div class="bootstrap-admin-panel-content">
                                     <ul>
-                                        <li>An admin theme built with <a href="http://getbootstrap.com" target="_blank">Bootstrap 3.x.</a></li>
-                                        <li>Free for personal and commercial use</li>
-                                        <li>Inspired by and based on <a href="https://github.com/VinceG/Bootstrap-Admin-Theme" target="_blank">Bootstrap-Admin-Theme</a></li>
+                                        <li>Sebuah Aplikasi Billing untuk Sekolah</a></li>
+                                        <li>Berbasis Web Server Klien</li>
+                                        <li>Multi user dan multi klien</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -55,10 +55,10 @@
                                 <div class="bootstrap-admin-panel-content">
                                     <ul>
                                         <li>
-                                            <a href="https://github.com/najmaweb/albadar" target="_blank">Github Repository</a>
+                                            <a href="https://github.com/najmaweb/albadar-1.1" target="_blank">Github Repository</a>
                                         </li>
                                         <li>
-                                            <a href="https://github.com/najmaweb/albadar/archive/master.zip">Download (.zip package)</a>
+                                            <a href="https://github.com/najmaweb/albadar-1.1/archive/master.zip">Download (.zip package)</a>
                                         </li>
                                         <li>
                                             License: MIT (see below)
