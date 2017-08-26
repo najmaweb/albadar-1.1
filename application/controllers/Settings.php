@@ -14,6 +14,7 @@ class Settings extends CI_Controller{
     }
     function index(){
         session_start();
+        checklogin();
         $data = array(
             "breadcrumb" => array(1=>"App",2=>"Setting"),
             "formtitle"=>"Setting",
