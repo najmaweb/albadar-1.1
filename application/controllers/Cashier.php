@@ -314,7 +314,7 @@ class Cashier extends CI_Controller{
             $dupsbamount = $_SESSION["psb"];
             $payment->savedetail($receiptno,"Pembbayaran DU/PSB",$dupsbamount);
         }
-        if($_SESSION["withbook"]){
+        if($_SESSION["withbuku"]){
             $this->Bukupayment->save($_SESSION["nis"],$receiptno,$_SESSION["book"],$this->Setting->getcurrentyear(),"1",$purpose,$description,$_SESSION["username"]);
             $bukuamount = $_SESSION["book"];
             $payment->savedetail($receiptno,"Pembayaran Buku",$bukuamount);
