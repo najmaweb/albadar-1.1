@@ -63,7 +63,8 @@ class Grade extends CI_Model{
         $sql.= "grade_id='".$params['id']."' ";
         $ci = & get_instance();
         $que = $ci->db->query($sql);
-        $sql = "update studentshistory set bookpaymentgroup_id='".$params["bookpaymentgroup_id"]."' ";
+        $sql = "update studentshistory set sppgroup_id= '".$params["sppgroup_id"]."',bookpaymentgroup_id='".$params["bookpaymentgroup_id"]."', ";
+        $sql.= "bimbelgroup_id= '".$params["bimbelgroup_id"]."',dupsbgroup_id='".$params["dupsbgroup_id"]."'";
         $sql.= "where grade_id='".$params["id"]."' and year='".$this->Setting->getcurrentyear()."'";
         $que = $ci->db->query($sql);
         return $sql;        
