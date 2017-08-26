@@ -94,7 +94,7 @@
                 <tr><td colspan=2 class="line"></td><td colspan=3></td></tr>
                 <tr>
                     <td>Sisa Tagihan SPP</td>
-                    <td class="rightaligned number"><?php echo  "Rp. " . ($sppremain);?></td>
+                    <td class="rightaligned number"><?php echo  "Rp. " . number_format($sppremain);?></td>
                     <td colspan=2>&nbsp;</td>
                     <td></td>
                     <td></td>
@@ -115,7 +115,7 @@
                 </tr>
                 <tr>
                     <td>Sisa Tagihan Buku</td>
-                    <td class="rightaligned number"><?php echo  "Rp. " . number_format($bookpaymentremain-$book);?></td>
+                    <td class="rightaligned number"><?php echo  "Rp. " . number_format($bookpaymentremain);?></td>
                     <td colspan=2>&nbsp;</td>
                     <td></td>
                     <td></td>

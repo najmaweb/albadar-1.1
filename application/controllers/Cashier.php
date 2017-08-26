@@ -103,7 +103,7 @@ class Cashier extends CI_Controller{
     }
     function previewkwitansi(){
         session_start();
-        $this->load->view("simulator/previewkwitansi");
+        $this->load->view("cashiers/previewkwitansi");
     }
     function processsppstring(){
         $out = "Pembayaran SPP bulan " . $_SESSION["sppfrstmonth"];
@@ -124,27 +124,24 @@ class Cashier extends CI_Controller{
         return $out;
     }
     function savesession(){
+        session_start();
         $params = $this->input->post();
-        foreach($params as $key=>$val){
-            echo $key . " -> " . $val . $this->crlf;
+        if(trim($params["nis"])===""){
+            redirect("../../cashier");
         }
-
         $nis = $params["nis"];
         $payment = new Spppayment($nis);
         $sppmaxyearmonth = $this->Spppayment->getsppmaxyearmonth();
         $sppremain = $payment->getsppremain();
         $cursppbill = $payment->getcurrmonthsppbill();
-
         $bimbel = new Bimbelpayment($nis);
         $bimbelmaxyearmonth = $this->Bimbelpayment->getbimbelmaxyearmonth();
         $bimbelremain=$bimbel->getbimbelremain();
         $curbimbelbill = $bimbel->getcurrmonthbimbelbill();
-
         $dupsb = new Dupsbpayment($nis);
         $dupsbremain = $dupsb->getdupsbremain();
         $buku = new Bukupayment($nis);
         $bookpayment = $buku->getbukuremain();
-        session_start();
         $_SESSION["sppfrstmonth"] = $params["sppfrstmonth"];
         $_SESSION["studentname"] = $params["studentname"];
         $_SESSION["sppfrstyear"] = $params["sppfrstyear"];
@@ -186,7 +183,6 @@ class Cashier extends CI_Controller{
             $_SESSION["withbimbel"] = false;
             $_SESSION["bimbel"] = 0;
         }
-
         if(isset($params["dupsbcheckbox"])){
             if(removedot($params["psb"])>0){
                 $_SESSION["withdupsb"] = true;
@@ -211,7 +207,6 @@ class Cashier extends CI_Controller{
             $_SESSION["withbuku"] = false;
             $_SESSION["book"] = 0;
         }
-
         $_SESSION["total"] = $_SESSION["psb"]+$_SESSION["spp"]+$_SESSION["book"]+$_SESSION["bimbel"];
         $_SESSION["topaid"] = $_SESSION["total"];
         $_SESSION["totaltagihan"] = "0";
@@ -227,11 +222,6 @@ class Cashier extends CI_Controller{
         $_SESSION["username"] = $_SESSION["username"];
         $_SESSION["sppmonthcount"] = $this->getsppmonthcount();
         $_SESSION["bimbelmonthcount"] = $this->getbimbelmonthcount();
-        $DEBUG = false;
-        if($DEBUG){
-            echo $_SESSION["username"] . $this->crlf;
-            echo "SPP Text" . $_SESSION["spptext"] . $this->crlf;
-        }
         redirect("../../cashier/previewkwitansi");
     }
     function index(){
@@ -279,7 +269,7 @@ class Cashier extends CI_Controller{
     }
     function saveall(){
         session_start();
-        $receiptno = $this->Receipt->save($_SESSION["nis"],$_SESSION["total"],date("Y"));
+        $receiptno = $this->Receipt->save($_SESSION["nis"],$_SESSION["total"],$_SESSION["sppremain"],$_SESSION["dupsbremain"],$_SESSION["bimbelremain"],$_SESSION["bookpaymentremain"],date("Y"));
         $_SESSION["receiptno"] = $receiptno;
         $montharray = getmontharray($_SESSION["sppfrstmonth"],$_SESSION["sppfrstyear"],$_SESSION["sppnextmonth"],$_SESSION["sppnextyear"]);
         $bimbelmontharray = getmontharray($_SESSION["bimbelfrstmonth"],$_SESSION["bimbelfrstyear"],$_SESSION["bimbelnextmonth"],$_SESSION["bimbelnextyear"]);
@@ -319,8 +309,5 @@ class Cashier extends CI_Controller{
             $bukuamount = $_SESSION["book"];
             $payment->savedetail($receiptno,"Pembayaran Buku",$bukuamount);
         }
-        //    $this->Bimbelpayment->save();
-    //    $this->Dupsbpayment->save();
-    //    $this->Bukupayment->save();
     }
 }
