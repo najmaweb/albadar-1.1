@@ -6,6 +6,8 @@
             <ul class="dropdown-menu">
                 <li><a href="/Dashboard">SPP</a></li>
                 <li><a href="/Dashboard/dupsb">DU/PSB</a></li>
+                <li><a href="/Dashboard/bimbel">Bimbel</a></li>
+                <li><a href="/Dashboard/buku">Buku</a></li>
             </ul>
         </li>
         <li class="<?php echo ($feedData==='kelas')?'active':'';?>">

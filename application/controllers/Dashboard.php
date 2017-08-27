@@ -32,14 +32,75 @@ class Dashboard extends CI_Controller{
             "sppkls5b"=>$this->Mdashboard->getsppstatistic(14,$month)["percentage"],
             "sppkls6a"=>$this->Mdashboard->getsppstatistic(15,$month)["percentage"],
             "sppkls6b"=>$this->Mdashboard->getsppstatistic(16,$month)["percentage"],
-            "spppercentage"=>$this->Mdashboard->getsppstatistic(5,$month)["percentage"],
-            "bimbelpercentage"=>$this->Mdashboard->getbimbelstatistic()["percentage"],
-            "bookpercentage"=>$this->Mdashboard->getbookstatistic()["percentage"],
             "months"=>$this->dates->getmonthsarray(),
             "month"=>$month
         );
-        $this->load->view("dashboard/dashboard",$data);
+        $this->load->view("dashboard/spp",$data);
     }
+    function bimbel(){
+        session_start();
+        checklogin();
+        if($this->uri->total_segments()>2){
+            $month = $this->uri->segment(3);
+        }else{
+            $month = date("m");
+        }
+        $data = array(
+            "feedData"=>"dashboard",
+            "role"=>1,
+            "bimbelkls1a"=>$this->Mdashboard->getbimbelstatistic(1,$month)["percentage"],
+            "bimbelkls1b"=>$this->Mdashboard->getbimbelstatistic(2,$month)["percentage"],
+            "bimbelkls1c"=>$this->Mdashboard->getbimbelstatistic(3,$month)["percentage"],
+            "bimbelkls2a"=>$this->Mdashboard->getbimbelstatistic(4,$month)["percentage"],
+            "bimbelkls2b"=>$this->Mdashboard->getbimbelstatistic(5,$month)["percentage"],
+            "bimbelkls2c"=>$this->Mdashboard->getbimbelstatistic(6,$month)["percentage"],
+            "bimbelkls3a"=>$this->Mdashboard->getbimbelstatistic(7,$month)["percentage"],
+            "bimbelkls3b"=>$this->Mdashboard->getbimbelstatistic(8,$month)["percentage"],
+            "bimbelkls3c"=>$this->Mdashboard->getbimbelstatistic(9,$month)["percentage"],
+            "bimbelkls4a"=>$this->Mdashboard->getbimbelstatistic(10,$month)["percentage"],
+            "bimbelkls4b"=>$this->Mdashboard->getbimbelstatistic(11,$month)["percentage"],
+            "bimbelkls4c"=>$this->Mdashboard->getbimbelstatistic(12,$month)["percentage"],
+            "bimbelkls5a"=>$this->Mdashboard->getbimbelstatistic(13,$month)["percentage"],
+            "bimbelkls5b"=>$this->Mdashboard->getbimbelstatistic(14,$month)["percentage"],
+            "bimbelkls6a"=>$this->Mdashboard->getbimbelstatistic(15,$month)["percentage"],
+            "bimbelkls6b"=>$this->Mdashboard->getbimbelstatistic(16,$month)["percentage"],
+            "months"=>$this->dates->getmonthsarray(),
+            "month"=>$month
+        );
+        $this->load->view("dashboard/bimbel",$data);
+    }
+    function buku(){
+        session_start();
+        checklogin();
+        if($this->uri->total_segments()>2){
+            $month = $this->uri->segment(3);
+        }else{
+            $month = date("m");
+        }
+        $data = array(
+            "feedData"=>"dashboard",
+            "role"=>1,
+            "bukukls1a"=>$this->Mdashboard->getbookstatistic(1,$month)["percentage"],
+            "bukukls1b"=>$this->Mdashboard->getbookstatistic(2,$month)["percentage"],
+            "bukukls1c"=>$this->Mdashboard->getbookstatistic(3,$month)["percentage"],
+            "bukukls2a"=>$this->Mdashboard->getbookstatistic(4,$month)["percentage"],
+            "bukukls2b"=>$this->Mdashboard->getbookstatistic(5,$month)["percentage"],
+            "bukukls2c"=>$this->Mdashboard->getbookstatistic(6,$month)["percentage"],
+            "bukukls3a"=>$this->Mdashboard->getbookstatistic(7,$month)["percentage"],
+            "bukukls3b"=>$this->Mdashboard->getbookstatistic(8,$month)["percentage"],
+            "bukukls3c"=>$this->Mdashboard->getbookstatistic(9,$month)["percentage"],
+            "bukukls4a"=>$this->Mdashboard->getbookstatistic(10,$month)["percentage"],
+            "bukukls4b"=>$this->Mdashboard->getbookstatistic(11,$month)["percentage"],
+            "bukukls4c"=>$this->Mdashboard->getbookstatistic(12,$month)["percentage"],
+            "bukukls5a"=>$this->Mdashboard->getbookstatistic(13,$month)["percentage"],
+            "bukukls5b"=>$this->Mdashboard->getbookstatistic(14,$month)["percentage"],
+            "bukukls6a"=>$this->Mdashboard->getbookstatistic(15,$month)["percentage"],
+            "bukukls6b"=>$this->Mdashboard->getbookstatistic(16,$month)["percentage"],
+            "months"=>$this->dates->getmonthsarray(),
+            "month"=>$month
+        );
+        $this->load->view("dashboard/buku",$data);        
+    }    
     function dupsb(){
         session_start();
         checklogin();
@@ -67,9 +128,6 @@ class Dashboard extends CI_Controller{
             "dupsbkls5b"=>$this->Mdashboard->getdupsbstatistic(14,$month)["percentage"],
             "dupsbkls6a"=>$this->Mdashboard->getdupsbstatistic(15,$month)["percentage"],
             "dupsbkls6b"=>$this->Mdashboard->getdupsbstatistic(16,$month)["percentage"],
-            "spppercentage"=>$this->Mdashboard->getdupsbstatistic(5,$month)["percentage"],
-            "bimbelpercentage"=>$this->Mdashboard->getbimbelstatistic()["percentage"],
-            "bookpercentage"=>$this->Mdashboard->getbookstatistic()["percentage"],
             "months"=>$this->dates->getmonthsarray(),
             "month"=>$month
         );
