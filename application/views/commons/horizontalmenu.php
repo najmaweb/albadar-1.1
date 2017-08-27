@@ -1,8 +1,12 @@
 <!-- left, vertical navbar -->
 <div class="col-md-2 bootstrap-admin-col-left">
     <ul class="nav navbar-collapse collapse bootstrap-admin-navbar-side">
-        <li class="<?php echo ($feedData==='about')?'active':'';?>">
-            <a href="/about"><i class="glyphicon glyphicon-chevron-right"></i> About</a>
+        <li class="dropdown">
+            <a href="#" role="button" class="dropdown-toggle" data-hover="dropdown"> <i class="glyphicon glyphicon-chevron-right"></i> Dashboard <i class="caret"></i></a>
+            <ul class="dropdown-menu">
+                <li><a href="/Dashboard">SPP</a></li>
+                <li><a href="/Dashboard/dupsb">DU/PSB</a></li>
+            </ul>
         </li>
         <li class="<?php echo ($feedData==='kelas')?'active':'';?>">
             <a href="/grades"><i class="glyphicon glyphicon-chevron-right"></i> Kelas</a>
@@ -37,6 +41,9 @@
         <?php if($role==="1"){?>
         <li class="<?php echo ($feedData==='user')?'active':'';?>">
             <a href="/users"><i class="glyphicon glyphicon-chevron-right"></i> User</a>
+        </li>
+        <li class="<?php echo ($feedData==='about')?'active':'';?>">
+            <a href="/about"><i class="glyphicon glyphicon-chevron-right"></i> About</a>
         </li>
         <?php }?>
     </ul>
