@@ -15,7 +15,7 @@ class Simulator extends CI_Controller{
         $nis = $this->uri->segment(3);
         $payment = new Spppayment($nis);
         $sppmaxyearmonth = $this->Spppayment->getsppmaxyearmonth();
-        $sppremain = $payment->getsppremain();
+        $sppremain = $payment->getsppremain(date("m"),date("Y"));
         $cursppbill = $payment->getcurrmonthsppbill();
         echo "Bulan Tahun sekarang " . date("m-Y") . $this->crlf;
         echo "NAMA " . $payment->getname() . $this->crlf;
@@ -132,7 +132,7 @@ class Simulator extends CI_Controller{
         $nis = $params["nis"];
         $payment = new Spppayment($nis);
         $sppmaxyearmonth = $this->Spppayment->getsppmaxyearmonth();
-        $sppremain = $payment->getsppremain();
+        $sppremain = $payment->getsppremain(date("m"),date("Y"));
         $cursppbill = $payment->getcurrmonthsppbill();
 
         $bimbel = new Bimbelpayment($nis);

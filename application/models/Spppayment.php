@@ -81,24 +81,31 @@ class Spppayment extends CI_Model{
             "status"=>$out[0]->paymentstatus,
         );
     }
-    function getsppremain(){
+    function getsppremain($lastsppmonth=null,$lastsppyear=null){
+        $lastspppayment = $this->getsppmaxyearmonth();
+        if(is_null($lastsppmonth)){
+            $lastsppmonth = $lastspppayment["maxmonth"];
+        }
+        if(is_null($lastsppyear)){
+            $lastsppyear = $lastspppayment["maxyear"];
+        }
         $comment = "MENAMPILKAN SISA TANGGUNGAN.";
         $comment.= "DIHITUNG DARI BULAN SEBELUM SAAT INI HINGGA TERAKHIR DILAKUKAN PEMBAYARAN";
         $sppamount = $this->getsppamount();
-        $lastspppayment = $this->getsppmaxyearmonth();
+        
         $monthcount = 0;
         $status = "TIDAK ADA SISA TANGGUNGAN";
-        if(date("Y")===$lastspppayment["maxyear"]){
-            if((date("m") - 1)<=$lastspppayment["maxmonth"]){
+        if(date("Y")===$lastsppyear){
+            if((date("m") - 1)<=$lastsppmonth){
                 $status = "TIDAK ADA SISA TANGGUNGAN";
                 $monthcount = 0;
-            }elseif((date("m") - 1)>$lastspppayment["maxmonth"]){
+            }elseif((date("m") - 1)>$lastsppmonth){
                 $status = "ADA KEKURANGAN DI TAHUN YANG SAMA";
-                $monthcount = (date("m") - 1) - $lastspppayment["maxmonth"];
+                $monthcount = (date("m") - 1) - $lastsppmonth;
             }
-        }elseif(date("Y")>$lastspppayment["maxyear"]){
-            $yearcount = date("Y") - $lastspppayment["maxyear"];
-            $premonths = 12 - $lastspppayment["maxmonth"];
+        }elseif(date("Y")>$lastsppyear){
+            $yearcount = date("Y") - $lastsppyear;
+            $premonths = 12 - $lastsppmonth;
             $postmonths = date("m") - 1;
             $status = "ADA KEKURANGAN DI TAHUN YANG BERBEDA";
             $monthcount = 12*$yearcount+$premonths+$postmonths;

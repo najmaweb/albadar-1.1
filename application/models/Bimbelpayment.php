@@ -81,22 +81,29 @@ class Bimbelpayment extends CI_Model{
             "status"=>$out[0]->paymentstatus,
         );
     }
-    function getbimbelremain(){
+    function getbimbelremain($lastbimbelmonth=null,$lastbimbelyear=null){
+        $lastbimbelpayment = $this->getbimbelmaxyearmonth();
+        if(is_null($lastbimbelmonth)){
+            $lastbimbelmonth = $lastbimbelpayment["maxmonth"];
+        }
+        if(is_null($lastbimbelyear)){
+            $lastbimbelyear = $lastbimbelpayment["maxyear"];
+        }
+
         $comment = "MENAMPILKAN SISA TANGGUNGAN.";
         $comment.= "DIHITUNG DARI BULAN SEBELUM SAAT INI HINGGA TERAKHIR DILAKUKAN PEMBAYARAN";
         $bimbelamount = $this->getbimbelamount();
-        $lastbimbelpayment = $this->getbimbelmaxyearmonth();
-        if(date("Y")===$lastbimbelpayment["maxyear"]){
-            if((date("m") - 1)<=$lastbimbelpayment["maxmonth"]){
+        if(date("Y")===$lastbimbelyear){
+            if((date("m") - 1)<=$lastbimbelmonth){
                 $status = "TIDAK ADA SISA TANGGUNGAN";
                 $monthcount = 0;
-            }elseif((date("m") - 1)>$lastbimbelpayment["maxmonth"]){
+            }elseif((date("m") - 1)>$lastbimbelmonth){
                 $status = "ADA KEKURANGAN DI TAHUN YANG SAMA";
-                $monthcount = (date("m") - 1) - $lastbimbelpayment["maxmonth"];
+                $monthcount = (date("m") - 1) - $lastbimbelmonth;
             }
-        }elseif(date("Y")>$lastbimbelpayment["maxyear"]){
-            $yearcount = date("Y") - $lastbimbelpayment["maxyear"];
-            $premonths = 12 - $lastbimbelpayment["maxmonth"];
+        }elseif(date("Y")>$lastbimbelyear){
+            $yearcount = date("Y") - $lastbimbelyear;
+            $premonths = 12 - $lastbimbelmonth;
             $postmonths = date("m") - 1;
             $status = "ADA KEKURANGAN DI TAHUN YANG BERBEDA";
             $monthcount = 12*$yearcount+$premonths+$postmonths;

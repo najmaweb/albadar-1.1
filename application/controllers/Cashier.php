@@ -16,7 +16,7 @@ class Cashier extends CI_Controller{
         $nis = $this->uri->segment(3);
         $payment = new Spppayment($nis);
         $sppmaxyearmonth = $this->Spppayment->getsppmaxyearmonth();
-        $sppremain = $payment->getsppremain();
+        $sppremain = $payment->getsppremain(date("m",date("Y")));
         $cursppbill = $payment->getcurrmonthsppbill();
         echo "Bulan Tahun sekarang " . date("m-Y") . $this->crlf;
         echo "NAMA " . $payment->getname() . $this->crlf;
@@ -133,11 +133,20 @@ class Cashier extends CI_Controller{
         $nis = $params["nis"];
         $payment = new Spppayment($nis);
         $sppmaxyearmonth = $this->Spppayment->getsppmaxyearmonth();
-        $sppremain = $payment->getsppremain();
+        
+        if($_SESSION["withspp"]){
+            $sppremain = $payment->getsppremain($_SESSION["sppnextmonth"],$_SESSION["sppnextyear"]);
+        }else{
+            $sppremain = $payment->getsppremain();
+        }
         $cursppbill = $payment->getcurrmonthsppbill();
         $bimbel = new Bimbelpayment($nis);
         $bimbelmaxyearmonth = $this->Bimbelpayment->getbimbelmaxyearmonth();
-        $bimbelremain=$bimbel->getbimbelremain();
+        if($_SESSION["withbimbel"]){
+            $bimbelremain=$bimbel->getbimbelremain($_SESSION["bimbelnextmonth"],$_SESSION["bimbelnextyear"]);
+        }else{
+            $bimbelremain=$bimbel->getbimbelremain();
+        }
         $curbimbelbill = $bimbel->getcurrmonthbimbelbill();
         $dupsb = new Dupsbpayment($nis);
         $dupsbremain = $dupsb->getdupsbremain();
@@ -294,7 +303,7 @@ class Cashier extends CI_Controller{
                 $year = substr($monthyear,2,4);
                 $purpose = "Untuk pembayaran Bimbel bulan " . $month . '/' . $year;
                 $description = "Untuk pembayaran Bimbel bulan " . $month . '/' . $year;
-                $this->Bimbelpayment->save($_SESSION["nis"],$receiptno,$_SESSION["bimbel"],$year,$month,$this->Setting->getcurrentyear(),$purpose,$description,$_SESSION["username"]);
+                $this->Bimbelpayment->save($_SESSION["nis"],$receiptno,$student->getbimbel($_SESSION["nis"]),$year,$month,$this->Setting->getcurrentyear(),$purpose,$description,$_SESSION["username"]);
             }
             $bimbelpayment = new Bimbelpayment($_SESSION["nis"]);
             $bimbel = $bimbelpayment->getbimbelamount();
