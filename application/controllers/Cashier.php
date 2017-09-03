@@ -9,6 +9,7 @@ class Cashier extends CI_Controller{
         $this->load->model("Dupsbpayment");
         $this->load->model("Bukupayment");
         $this->load->model("Receipt");
+        $this->load->model("Student");
         $this->crlf = "<br />";
     }
     function attr(){
@@ -273,6 +274,7 @@ class Cashier extends CI_Controller{
         $_SESSION["receiptno"] = $receiptno;
         $montharray = getmontharray($_SESSION["sppfrstmonth"],$_SESSION["sppfrstyear"],$_SESSION["sppnextmonth"],$_SESSION["sppnextyear"]);
         $bimbelmontharray = getmontharray($_SESSION["bimbelfrstmonth"],$_SESSION["bimbelfrstyear"],$_SESSION["bimbelnextmonth"],$_SESSION["bimbelnextyear"]);
+        $student = new Student();
         $payment = new Spppayment($_SESSION["nis"]);
         if($_SESSION["withspp"]){
             foreach($montharray as $monthyear){
@@ -280,7 +282,7 @@ class Cashier extends CI_Controller{
                 $year = substr($monthyear,2,4);
                 $purpose = "Untuk pembayaran SPP bulan " . $month . '/' . $year;
                 $description = "Untuk pembayaran SPP bulan " . $month . '/' . $year;
-                $this->Spppayment->save($_SESSION["nis"],$receiptno,$_SESSION["spp"],$year,$month,$this->Setting->getcurrentyear(),$purpose,$description,$_SESSION["username"]);
+                $this->Spppayment->save($_SESSION["nis"],$receiptno,$student->getspp($_SESSION["nis"]),$year,$month,$this->Setting->getcurrentyear(),$purpose,$description,$_SESSION["username"]);
             }
             $spp = $payment->getsppamount();
             $sppamount = $spp*count($montharray);
