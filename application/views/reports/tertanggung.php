@@ -55,7 +55,7 @@
                 $totdupsb+=$student->dupsb;$totbook+=$student->book;$totbimbel+=$student->bimbel;$totspp+=$student->spp;
                 ?>
                 <?php $c++;?>
-                <?}?>
+                <?php }?>
             </tbody>
             <tfoot>
                 <tr>
@@ -63,7 +63,8 @@
                 <th class="number"><?php echo "Rp." . number_format($totspp);?></th>
                 <th class="number"><?php echo "Rp." . number_format($tothupsb);?></th>
                 <th class="number"><?php echo "Rp." . number_format($totbook);?></th>
-                <th class="number"><?php echo "Rp." . number_format($totbimbel);?></th></tr>
+                <th class="number"><?php echo "Rp." . number_format($totbimbel);?></th>
+                </tr>
             </tfoot>
         </table>
     </body>
