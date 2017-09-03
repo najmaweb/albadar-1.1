@@ -1,7 +1,9 @@
 <?php
 class Student extends CI_Model{
-    function __construct(){
+    var $nis;
+    function __construct($nis = null){
         parent::__construct();
+        $this->nis = $nis;
     }
     function getStudent($id){
         $sql = "select a.id,a.name,a.nis,a.grade_id,a.sppgroup_id,a.dupsbgroup_id,a.bimbelgroup_id,a.bookpaymentgroup_id,c.initmonth,c.inityear,a.description ";
