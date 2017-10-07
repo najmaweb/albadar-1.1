@@ -46,6 +46,15 @@ togglespp = function(){
     filltotal();
     fillreturnmoney();
 }
+toggledupsb = function(){
+    if($("#dupsbcheckbox").prop("checked")){
+        $("#psb").val($("#psb_").val());
+    }else{
+        $("#psb").val(0);
+    }
+    filltotal();
+    fillreturnmoney();
+}
 togglebimbel = function(){
     if($("#bimbelcheckbox").prop("checked")){
         $("#bimbelmonthdiv").show();
@@ -188,6 +197,9 @@ $(".formatted").blur(function(){
 togglespp();
 $("#sppcheckbox").change(function(){
     togglespp();
+})
+$("#dupsbcheckbox").change(function(){
+    toggledupsb();
 })
 togglebimbel();
 $("#bimbelcheckbox").change(function(){
