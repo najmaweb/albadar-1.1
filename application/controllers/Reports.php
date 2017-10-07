@@ -3,6 +3,7 @@ class Reports extends CI_Controller{
     function __construct(){
         parent::__construct();
         $this->load->model("report");
+        $this->load->helper("report");
         $this->load->helper("datetime");
         $this->load->model("setting");
         $this->load->model("grade");
@@ -208,6 +209,7 @@ class Reports extends CI_Controller{
             "feedData"=>"reports",
             "err_message"=>"",
             "role"=>$this->User->getrole($_SESSION["userid"]),
+            "montharray"=>montharray(),
             "pyear"=>$pyear,
             "spp"=>$spp,
             "bimbel"=>$bimbel,

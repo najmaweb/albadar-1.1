@@ -1,0 +1,40 @@
+h1,h2,h3,h4{
+    text-align: center;
+}
+.commonreport{
+    width: 100%;
+}
+.commonreport thead tr th{
+    border: 1px solid black;
+}
+.commonreport tbody tr td{
+    padding: 10px;
+    border-bottom: solid 1px black;
+    font-size: 10pt;
+}
+.number{
+    text-align: right;
+    padding: 10px;
+}
+.commonreport tfoot tr td{
+    padding: 10px;
+    border-bottom: solid 1px black;
+    font-weight: bold;
+}
+.commonreport tbody tr.subheader th{
+    border-bottom: 3px solid black;
+    text-align: left;
+    font-size: 20px;
+    font-style: italic;
+    padding: 5 0 5 10;
+}
+.commonreport .centered{
+    text-align: center;
+}
+.grouphead{
+    background: black;
+    color:white;
+}
+.groupfoot{
+    background: grey;
+}

@@ -1,48 +1,7 @@
 <html>
     <head>
         <title><?php echo $formtitle;?></title>
-        <style>
-            h1,h2,h3,h4{
-                text-align: center;
-            }
-            .commonreport{
-                width: 100%;
-            }
-            .commonreport thead tr th{
-                border: 1px solid black;
-            }
-            .commonreport tbody tr td{
-                padding: 10px;
-                border-bottom: solid 1px black;
-
-            }
-            .number{
-                text-align: right;
-                padding: 10px;
-            }
-            .commonreport tfoot tr td{
-                padding: 10px;
-                border-bottom: solid 1px black;
-                font-weight: bold;
-            }
-            .commonreport tbody tr.subheader th{
-                border-bottom: 3px solid black;
-                text-align: left;
-                font-size: 20px;
-                font-style: italic;
-                padding: 5 0 5 10;
-            }
-            .commonreport .centered{
-                text-align: center;
-            }
-            .grouphead{
-                background: black;
-                color:white;
-            }
-            .groupfoot{
-                background: grey;
-            }
-         </style>
+        <link rel="stylesheet" href="/assets/css/report/rekapsppperkelas.css" />
     </head>
     <body>
         <h1><?php echo $formtitle;?></h1>
@@ -59,14 +18,41 @@
             <tbody>
                 <?php 
                     $c = 1;
-                    $lastgrade = "";
+                    $lastgrade = "";$grade = "";
+                    foreach($montharray as $month){
+                        $submonth = "sub".$month;
+                        $$submonth = "";
+                    }
                 ?>
                 <?php foreach($objs as $obj){?>
                 <?php 
-                    $grade = $obj->grade;
-                    if(($grade != $lastgrade)){
+                    
+                    if(($grade != $obj->grade)){
                         $lastgrade = $grade;
-                        $strgrouptotal = "<tr><td colspan=14>Total </td></tr>";
+                        if($grade !==""){
+                ?>
+                <tr>
+                    <td colspan=2>Total </td>
+                    <td class="number"><?php echo number_format($subjul);?></td>
+                    <td class="number"><?php echo number_format($subags);?></td>
+                    <td class="number"><?php echo number_format($subsep);?></td>
+                    <td class="number"><?php echo number_format($subokt);?></td>
+                    <td class="number"><?php echo number_format($subnop);?></td>
+                    <td class="number"><?php echo number_format($subdes);?></td>
+                    <td class="number"><?php echo number_format($subjan);?></td>
+                    <td class="number"><?php echo number_format($subfeb);?></td>
+                    <td class="number"><?php echo number_format($submar);?></td>
+                    <td class="number"><?php echo number_format($subapr);?></td>
+                    <td class="number"><?php echo number_format($submei);?></td>
+                    <td class="number"><?php echo number_format($subjun);?></td>
+                </tr>
+                <?php 
+                            foreach($montharray as $month){
+                                $submonth = "sub".$month;
+                                $$submonth = "";
+                            }
+                        }
+                        $grade = $obj->grade;
                 ?>
                 <tr>
                     <td colspan="14" class="grouphead">
@@ -74,35 +60,34 @@
                     </td>
                 </tr>
                 <?php
-                    }else{
-                        $strgrouptotal = "";
                     }
                 ?>
                 <tr>
                     <td class="number"><?php echo $c;?></td>
                     <td class="left"><?php echo '(' . $obj->nis . ')' . $obj->name;?></td>
-                    <td class="number"><?php echo $obj->jul;?></td>
-                    <td class="number"><?php echo $obj->ags;?></td>
-                    <td class="number"><?php echo $obj->sep;?></td>
-                    <td class="number"><?php echo $obj->okt;?></td>
-                    <td class="number"><?php echo $obj->nop;?></td>
-                    <td class="number"><?php echo $obj->des;?></td>
-                    <td class="number"><?php echo $obj->jan;?></td>
-                    <td class="number"><?php echo $obj->feb;?></td>
-                    <td class="number"><?php echo $obj->mar;?></td>
-                    <td class="number"><?php echo $obj->apr;?></td>
-                    <td class="number"><?php echo $obj->mei;?></td>
-                    <td class="number"><?php echo $obj->jun;?></td>
+                    <?php
+                    foreach($montharray as $month){
+                        ?>
+                        <td class="number"><?php echo number_format($obj->$month);?></td>
+                        <?php
+                    }
+                    ?>
                 </tr>
-                <?php $c = $c + 1;?>
-                <?php 
-                echo $strgrouptotal;
+                <?php
+                    foreach($montharray as $month){
+                        $submonth = "sub".$month;
+                        $$submonth += $obj->$month;
+                    }
                 ?>
+                <?php $c = $c + 1;?>
                 <?php }?>
-
             </tbody>
             <tfoot>
-                <tr><td colspan=3>Total</td><td colspan=2 class="number"><?php echo "Rp." . number_format($spptotal+$bimbeltotal);?></td><td></td></tr>
+                <tr>
+                <td colspan=3>Total</td>
+                <td colspan=2 class="number"><?php echo "Rp." . number_format($spptotal+$bimbeltotal);?></td>
+                <td></td>
+                </tr>
             </tfoot>
         </table>
     </body>
