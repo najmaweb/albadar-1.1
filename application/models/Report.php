@@ -131,7 +131,8 @@ class Report extends CI_Model{
         $year = $ci->Setting->getcurrentyear();
         $sql = "select nis,name,sum(jun)jun,sum(jul)jul,sum(ags)ags,sum(sep)sep,";
         $sql.= "sum(okt)okt,sum(nop)nop,sum(des)des,sum(jan)jan,";
-        $sql.= "sum(feb)feb,sum(mar)mar,sum(apr)apr,sum(mei)mei ";
+        $sql.= "sum(feb)feb,sum(mar)mar,sum(apr)apr,sum(mei)mei, grade, ";
+        $sql.= "0 tot, 0 sisa ";
         $sql.= "from (select a.id,b.nis,b.name,amount,pmonth,pyear,year ";
         $sql.= ", case a.pmonth when '06' then amount else '0' end jun ";
         $sql.= ", case a.pmonth when '07' then amount else '0' end jul ";
@@ -145,9 +146,13 @@ class Report extends CI_Model{
         $sql.= ", case a.pmonth when '03' then amount else '0' end mar ";
         $sql.= ", case a.pmonth when '04' then amount else '0' end apr ";
         $sql.= ", case a.pmonth when '05' then amount else '0' end mei ";
-        $sql.= " from (select * from spp where cyear='".$year."') a right outer join students b on b.nis=a.nis order by a.nis,a.pmonth)x ";
+        $sql.= ",c.name grade ";
+        $sql.= " from (select * from spp where cyear='".$year."') a right outer join students b on b.nis=a.nis ";
+        $sql.= " left outer join grades c on c.id=b.grade_id ";
+        $sql.= " order by a.nis,a.pmonth)x ";
         $sql.= "";
-        $sql.= "group by nis,name";
+        $sql.= "group by nis,name,grade ";
+        $sql.= "order by grade ";
         $ci = & get_instance();
         $que = $ci->db->query($sql);
         return $que->result();

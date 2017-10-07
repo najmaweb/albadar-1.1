@@ -35,6 +35,13 @@
             .commonreport .centered{
                 text-align: center;
             }
+            .grouphead{
+                background: black;
+                color:white;
+            }
+            .groupfoot{
+                background: grey;
+            }
          </style>
     </head>
     <body>
@@ -50,8 +57,27 @@
                 </tr>
             </thead>
             <tbody>
-                <?php $c = 1;?>
+                <?php 
+                    $c = 1;
+                    $lastgrade = "";
+                ?>
                 <?php foreach($objs as $obj){?>
+                <?php 
+                    $grade = $obj->grade;
+                    if(($grade != $lastgrade)){
+                        $lastgrade = $grade;
+                        $strgrouptotal = "<tr><td colspan=14>Total </td></tr>";
+                ?>
+                <tr>
+                    <td colspan="14" class="grouphead">
+                    Kelas <?php echo $grade;?>
+                    </td>
+                </tr>
+                <?php
+                    }else{
+                        $strgrouptotal = "";
+                    }
+                ?>
                 <tr>
                     <td class="number"><?php echo $c;?></td>
                     <td class="left"><?php echo '(' . $obj->nis . ')' . $obj->name;?></td>
@@ -69,6 +95,9 @@
                     <td class="number"><?php echo $obj->jun;?></td>
                 </tr>
                 <?php $c = $c + 1;?>
+                <?php 
+                echo $strgrouptotal;
+                ?>
                 <?php }?>
 
             </tbody>
