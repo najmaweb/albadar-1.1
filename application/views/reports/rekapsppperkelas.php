@@ -33,18 +33,14 @@
                 ?>
                 <tr>
                     <td colspan=2>Total </td>
-                    <td class="number"><?php echo number_format($subjul);?></td>
-                    <td class="number"><?php echo number_format($subags);?></td>
-                    <td class="number"><?php echo number_format($subsep);?></td>
-                    <td class="number"><?php echo number_format($subokt);?></td>
-                    <td class="number"><?php echo number_format($subnop);?></td>
-                    <td class="number"><?php echo number_format($subdes);?></td>
-                    <td class="number"><?php echo number_format($subjan);?></td>
-                    <td class="number"><?php echo number_format($subfeb);?></td>
-                    <td class="number"><?php echo number_format($submar);?></td>
-                    <td class="number"><?php echo number_format($subapr);?></td>
-                    <td class="number"><?php echo number_format($submei);?></td>
-                    <td class="number"><?php echo number_format($subjun);?></td>
+                    <?php
+                    foreach($montharray as $month){
+                        $submonth = "sub".$month;
+                        ?>
+                        <td class="number"><?php echo number_format($$submonth);?></td>
+                        <?php
+                    }
+                    ?>
                 </tr>
                 <?php 
                             foreach($montharray as $month){
