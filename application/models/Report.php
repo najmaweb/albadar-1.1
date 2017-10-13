@@ -158,7 +158,7 @@ class Report extends CI_Model{
         return $que->result();
     }
     function getrekapbimbelperkelas(){
-        $sql = "select nis,name,sum(jun)jun,sum(jul)jul,sum(ags)ags,sum(sep)sep,sum(okt)okt,sum(nop)nop,sum(des)des,sum(jan)jan,sum(feb)feb,sum(mar)mar,sum(apr)apr,sum(mei)mei ";
+        $sql = "select nis,name,sum(jun)jun,sum(jul)jul,sum(ags)ags,sum(sep)sep,sum(okt)okt,sum(nop)nop,sum(des)des,sum(jan)jan,sum(feb)feb,sum(mar)mar,sum(apr)apr,sum(mei)mei,grade ";
         $sql.= "from (select a.id,b.nis,b.name,amount,pmonth,pyear,year ";
         $sql.= ", case a.pmonth when '06' then amount else '0' end jun ";
         $sql.= ", case a.pmonth when '07' then amount else '0' end jul ";
@@ -172,8 +172,11 @@ class Report extends CI_Model{
         $sql.= ", case a.pmonth when '03' then amount else '0' end mar ";
         $sql.= ", case a.pmonth when '04' then amount else '0' end apr ";
         $sql.= ", case a.pmonth when '05' then amount else '0' end mei ";
-        $sql.= " from bimbel a right outer join students b on b.nis=a.nis order by a.nis,a.pmonth)x ";
-        $sql.= "group by nis,name";
+        $sql.= ",c.name grade ";
+        $sql.= " from bimbel a left outer join students b on b.nis=a.nis ";
+        $sql.= " left outer join grades c on c.id=b.grade_id ";
+        $sql.= " order by c.id,a.nis,a.pmonth)x ";
+        $sql.= "group by grade,nis,name ";
         $ci = & get_instance();
         $que = $ci->db->query($sql);
         return $que->result();

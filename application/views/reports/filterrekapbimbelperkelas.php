@@ -5,49 +5,18 @@
         <script type="text/javascript" src="/assets/js/jquery-2.0.3.min.js"></script>
         <script type="text/javascript" src="/assets/js/bootstrap.min.js"></script>
         <title><?php echo $formtitle;?></title>
-        <style>
-            h1,h2,h3,h4{
-                text-align: center;
-            }
-            .commonreport{
-                width: 100%;
-            }
-            .commonreport thead tr th{
-                border: 1px solid black;
-                text-align:center;
-            }
-            .commonreport tbody tr td{
-                padding: 10px;
-                border-bottom: solid 1px black;
-
-            }
-            .number{
-                text-align: right;
-                padding: 10px;
-            }
-            .commonreport tfoot tr td{
-                padding: 10px;
-                border-bottom: solid 1px black;
-                font-weight: bold;
-            }
-            .commonreport tbody tr.subheader th{
-                border-bottom: 3px solid black;
-                text-align: left;
-                font-size: 20px;
-                font-style: italic;
-                padding: 5 0 5 10;
-            }
-            .commonreport .centered{
-                text-align: center;
-            }
-         </style>
+        <link rel='stylesheet' href='/assets/css/report/rekapbimbelperkelas.css' />
     </head>
     <body>
     <div class="container">
         <div class="row">
             <div class="col-sm-1">
                 <div class="dropdown">
-                    <button class="btn dropdown-toggle" type="button" data-toggle="dropdown">Kelas <span class="caret"></span></button>
+                    <button class="btn dropdown-toggle" type="button" data-toggle="dropdown">
+                    Kelas 
+                    <span class="caret">
+                    </span>
+                    </button>
                     <ul class="dropdown-menu" id="dropdowngrade">
                         <?php foreach($grades as $grade){?>
                             <li val="<?php echo $grade;?>"><a><?php echo $grade;?></a></li>

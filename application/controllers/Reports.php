@@ -245,12 +245,13 @@ class Reports extends CI_Controller{
             "formtitle"=>"Rekap Pembayaran Bimbel",
             "feedData"=>"reports",
             "err_message"=>"",
+            "montharray"=>montharray(),
             "role"=>$this->User->getrole($_SESSION["userid"]),
             "pyear"=>$pyear,
             "periodmonths"=>getperiodmonths(),
             "objs"=>$this->report->getrekapbimbelperkelas()
         );
-        $this->load->view("reports/rekapbimbelperkelas",$data);
+        $this->load->view("reports/rekapbimbelperkelas_",$data);
     }
     function getsumrekapbimbelperkelas(){
         echo $this->report->getsumrekapbimbelperkelas();

@@ -79,8 +79,8 @@
             </tbody>
             <tfoot>
                 <tr>
-                <td colspan=3>Total</td>
-                <td colspan=2 class="number"><?php echo "Rp." . number_format($spptotal+$bimbeltotal);?></td>
+                <td colspan=3>-</td>
+                <td colspan=2 class="number"><?php echo "-" . number_format(0);?></td>
                 <td></td>
                 </tr>
             </tfoot>
