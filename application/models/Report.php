@@ -9,12 +9,21 @@ class Report extends CI_Model{
         $sql = "select nname,sum(b.amount)spp,sum(c.amount)bimbel,sum(d.amount)dupsb,sum(e.amount)bookpayment from users a ";
         $sql.= "left outer join (select createuser,amount from spp where cyear=".$ci->setting->getcurrentyear().") b on b.createuser=a.nname ";
         $sql.= "left outer join (select createuser,amount from bimbel where cyear=".$ci->setting->getcurrentyear().") c on c.createuser=a.nname ";
-        $sql.= "left outer join (select createuser,amount from dupsb where year=".$ci->setting->getcurrentyear().") d on d.createuser=a.nname ";
-        $sql.= "left outer join (select createuser,amount from bookpayment where year=".$ci->setting->getcurrentyear().") e on e.createuser=a.nname ";
+        $sql.= "left outer join (select createuser,amount from dupsb where year='".$ci->setting->getcurrentyear()."') d on d.createuser=a.nname ";
+        $sql.= "left outer join (select createuser,amount from bookpayment where year='".$ci->setting->getcurrentyear()."') e on e.createuser=a.nname ";
+
+        $sql = "select nname,b.amount spp,c.amount bimbel,d.amount dupsb,";
+        $sql.= "e.amount bookpayment from users a ";
+        $sql.= "left outer join (select createuser,sum(amount)amount from spp where cyear='".$ci->setting->getcurrentyear()."' group by createuser) b on b.createuser=a.nname ";
+        $sql.= "left outer join (select createuser,sum(amount)amount from bimbel where cyear='".$ci->setting->getcurrentyear()."' group by createuser) c on c.createuser=a.nname ";
+        $sql.= "left outer join (select createuser,sum(amount)amount from dupsb where year='".$ci->setting->getcurrentyear()."' group by createuser) d on d.createuser=a.nname ";
+        $sql.= "left outer join (select createuser,sum(amount)amount from bookpayment where year='".$ci->setting->getcurrentyear()."' group by createuser) e on e.createuser=a.nname ";
+ 
+ 
         if($username!=="all"){
             $sql.= "where a.nname='".$username."'";
         }
-        $sql.= "group by nname ";
+       // $sql.= "group by nname ";
         $que = $ci->db->query($sql);
         $res = $que->result();
         return $res;
