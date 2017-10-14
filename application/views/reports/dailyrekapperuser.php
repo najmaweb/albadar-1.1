@@ -23,7 +23,7 @@
         <form action="/reports/filterdailyrekapperuser" method="post">
         <span class="filter">Petugas</label>
         <?php echo form_dropdown("user",$users,$user);?>
-        <input type='text' id='datepicker' name='date'>
+        <input type='text' id='datepicker' name='date' value='<?php echo $humandate?>'>
         <button id="filter" name="filter">Filter</button>
         </form>
         </h3>

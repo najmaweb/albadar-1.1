@@ -40,16 +40,20 @@ class Reports extends CI_Controller{
             case 2:
             $user = 'all';
             $date = date_format(date_create(),"Y-m-d");
+            $humandate = date_format(date_create(),"d/m/Y");
             $dailyreports = $this->report->dailyrekapperuser($date,"all");
             break;
             case 3:
             $user = $this->uri->segment(3);
             $date = date_format(date_create(),"Y-m-d");
+            $humandate = date_format(date_create(),"d/m/Y");
             $dailyreports = $this->report->dailyrekapperuser($date,$user);
             break;
             case 4:
             $user = $this->uri->segment(3);
             $date = $this->uri->segment(4);
+            $arr = explode("-",$this->uri->segment(4));
+            $humandate = $arr[2]."/".$arr[1]."/".$arr[0];
             $dailyreports = $this->report->dailyrekapperuser($date,$user);
             break;                        
         }/*
@@ -69,6 +73,7 @@ class Reports extends CI_Controller{
             "dailyreports"=>$dailyreports,//$this->report->dailyrekapperuser(),
             "users"=>$this->User->getarray(),
             "user"=>$user,
+            "humandate"=>$humandate,
             "humanmonth"=>getperiodmonths()
         );
         $this->load->view("reports/dailyrekapperuser",$data);        
