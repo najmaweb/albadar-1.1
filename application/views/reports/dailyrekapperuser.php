@@ -2,6 +2,19 @@
     <head>
         <title>Rekap Harian Per Petugas</title>
         <link rel="stylesheet" href="/assets/css/najma.reports.css" />
+
+        <link rel="stylesheet" href="/assets/vendors/jquery-ui-1.12.1.custom/jquery-ui.css">
+        <link rel="stylesheet" href="/resources/demos/style.css">
+        <script src="/assets/vendors/jquery-ui-1.12.1.custom/external/jquery/jquery.js"></script>
+        <script src="/assets/vendors/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
+        <script>
+
+        $( function() {
+            $( "#datepicker" ).datepicker({ dateFormat: 'dd/mm/yy'});
+        } );
+        </script>
+
+
     </head>
     <body>
         <div class="topnavcenter"><a href="/reports"><img src="/assets/images/home16.png" /></a></div>
@@ -10,6 +23,7 @@
         <form action="/reports/filterdailyrekapperuser" method="post">
         <span class="filter">Petugas</label>
         <?php echo form_dropdown("user",$users,$user);?>
+        <input type='text' id='datepicker' name='date'>
         <button id="filter" name="filter">Filter</button>
         </form>
         </h3>

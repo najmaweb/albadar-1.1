@@ -27,19 +27,39 @@ class Reports extends CI_Controller{
     }
     function filterdailyrekapperuser(){
         $params = $this->input->post();
-        redirect("../dailyrekapperuser/".$params["user"]);
+        $arr = explode("/",$params["date"]);
+        $date = $arr[2]."-".$arr[1]."-".$arr[0];
+        redirect("../dailyrekapperuser/".$params["user"]."/".$date);
     }
     function dailyrekapperuser(){
         session_start();
         checklogin();
         $params = $this->input->post();
+        $date = date_format(date_create(),"Y-m-d");
+        switch($this->uri->total_segments()){
+            case 2:
+            $user = 'all';
+            $date = date_format(date_create(),"Y-m-d");
+            $dailyreports = $this->report->dailyrekapperuser($date,"all");
+            break;
+            case 3:
+            $user = $this->uri->segment(3);
+            $date = date_format(date_create(),"Y-m-d");
+            $dailyreports = $this->report->dailyrekapperuser($date,$user);
+            break;
+            case 4:
+            $user = $this->uri->segment(3);
+            $date = $this->uri->segment(4);
+            $dailyreports = $this->report->dailyrekapperuser($date,$user);
+            break;                        
+        }/*
         if($this->uri->total_segments()>2){
             $user = $this->uri->segment(3);
             $dailyreports = $this->report->dailyrekapperuser($user);
         }else{
             $user = "all";
             $dailyreports = $this->report->dailyrekapperuser("all");
-        }
+        }*/
         $data = array(
             "breadcrumb" => array(1=>"Laporan",2=>"Rekap Harian Per Petugas"),
             "formtitle"=>"Rekap Harian Per Petugas",

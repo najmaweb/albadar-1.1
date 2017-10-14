@@ -4,7 +4,7 @@ class Report extends CI_Model{
         parent::__construct();
         $this->load->library("Dates");
     }
-    function dailyrekapperuser($username="all"){
+    function dailyrekapperuser($date,$username="all"){
         $ci = & get_instance();
         $sql = "select nname,sum(b.amount)spp,sum(c.amount)bimbel,sum(d.amount)dupsb,sum(e.amount)bookpayment from users a ";
         $sql.= "left outer join (select createuser,amount from spp where cyear=".$ci->setting->getcurrentyear().") b on b.createuser=a.nname ";
@@ -14,10 +14,18 @@ class Report extends CI_Model{
 
         $sql = "select nname,b.amount spp,c.amount bimbel,d.amount dupsb,";
         $sql.= "e.amount bookpayment from users a ";
-        $sql.= "left outer join (select createuser,sum(amount)amount from spp where cyear='".$ci->setting->getcurrentyear()."' group by createuser) b on b.createuser=a.nname ";
-        $sql.= "left outer join (select createuser,sum(amount)amount from bimbel where cyear='".$ci->setting->getcurrentyear()."' group by createuser) c on c.createuser=a.nname ";
-        $sql.= "left outer join (select createuser,sum(amount)amount from dupsb where year='".$ci->setting->getcurrentyear()."' group by createuser) d on d.createuser=a.nname ";
-        $sql.= "left outer join (select createuser,sum(amount)amount from bookpayment where year='".$ci->setting->getcurrentyear()."' group by createuser) e on e.createuser=a.nname ";
+        $sql.= "left outer join (select createuser,sum(amount)amount from spp ";
+        $sql.= "where cyear='".$ci->setting->getcurrentyear()."' and date_format(createdate,'%Y-%m-%d')='".$date."' group by createuser) b ";
+        $sql.= "on b.createuser=a.nname ";
+        $sql.= "left outer join (select createuser,sum(amount)amount from bimbel ";
+        $sql.= "where cyear='".$ci->setting->getcurrentyear()."'  and date_format(createdate,'%Y-%m-%d')='".$date."' group by createuser) c ";
+        $sql.= "on c.createuser=a.nname ";
+        $sql.= "left outer join (select createuser,sum(amount)amount from dupsb ";
+        $sql.= "where year='".$ci->setting->getcurrentyear()."'  and date_format(createdate,'%Y-%m-%d')='".$date."' group by createuser) d ";
+        $sql.= "on d.createuser=a.nname ";
+        $sql.= "left outer join (select createuser,sum(amount)amount from bookpayment ";
+        $sql.= "where year='".$ci->setting->getcurrentyear()."'  and date_format(createdate,'%Y-%m-%d')='".$date."' group by createuser) e ";
+        $sql.= "on e.createuser=a.nname ";
  
  
         if($username!=="all"){
