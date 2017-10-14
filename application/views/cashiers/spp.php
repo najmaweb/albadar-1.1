@@ -79,6 +79,7 @@
                                             <label class="col-lg-3 control-label" for="book">Buku&nbsp;<input type="checkbox" id="bukucheckbox" name="bukucheckbox" checked="checked"></label>
                                             <div class="col-lg-9">
                                                 <input type="text" id="book" name="book"  class="form-control affect-total formatted" value="0">
+                                                <input type="hidden" id="oribook" name="oribook"  class="form-control affect-total" value="0">
                                             </div>
                                         </div>
                                         <div class="form-group bimbel">

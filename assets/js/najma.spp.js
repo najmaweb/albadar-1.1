@@ -66,6 +66,16 @@ togglebimbel = function(){
     filltotal();
     fillreturnmoney();
 }
+togglebuku = function(){
+    if($("#bukucheckbox").prop("checked")){
+        $("#book").val($("#oribook").val());
+    }else{
+        $("#book").val(0);
+    }
+    filltotal();
+    fillreturnmoney();
+}
+
 $.fn.adjustval = function(options){
     $(this).change(function(){
         var settings = $.extend({
@@ -138,6 +148,8 @@ $.ajax({
                     $("#bimbel_").val(numberWithCommas(res.bimbel));
                     $("#bimbel").val(numberWithCommas(res.bimbel));
                     $("#oribimbel").val(res.bimbel);
+                    $("#oribook").val(res.bookremain);
+                    
                     $("#psb_").val(numberWithCommas(res.dupsbremain));
                     $("#psb").val(numberWithCommas(res.dupsbremain));
                     if(res.dupsbremain==="0"){
@@ -205,6 +217,11 @@ togglebimbel();
 $("#bimbelcheckbox").change(function(){
     togglebimbel();
 });
+$("#bukucheckbox").change(function(){
+    togglebuku();
+});
+
+//
 $(".affect-total").keyup(function(){
     filltotal();
     fillreturnmoney();
