@@ -47,6 +47,7 @@ class Receipts extends CI_Controller{
             "bimbelremain"=>$receipt->bimbelremain,
             "dupsbremain"=>$receipt->dupsbremain,
             "bookpaymentremain"=>$receipt->bookremain,
+            "book"=>0,
             "periodmonths" => getperiodmonths(),
             "receiptid"=>$id,
         );
@@ -75,6 +76,7 @@ class Receipts extends CI_Controller{
             "bimbelremain"=>0,
             "dupsbremain"=>0,
             "bookpaymentremain"=>0,
+            "book"=>0,
             "periodmonths" => getperiodmonths()
         );
         $this->load->view("receipts/kwitansi",$data);
