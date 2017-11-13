@@ -282,8 +282,8 @@ class Cashier extends CI_Controller{
     }
     function saveall(){
         session_start();
-//        $receiptno = $this->Receipt->save($_SESSION["nis"],$_SESSION["total"],$_SESSION["sppremain"],$_SESSION["dupsbremain"],$_SESSION["bimbelremain"],$_SESSION["bookpaymentremain"],date("Y"));
-        $receiptno = $this->Receipt->save($_SESSION["nis"],$_SESSION["total"],date("Y"));
+        $receiptno = $this->Receipt->save($_SESSION["nis"],$_SESSION["total"],$_SESSION["sppremain"],$_SESSION["dupsbremain"],$_SESSION["bimbelremain"],$_SESSION["bookpaymentremain"],date("Y"));
+//        $receiptno = $this->Receipt->save($_SESSION["nis"],$_SESSION["total"],date("Y"));
         $_SESSION["receiptno"] = $receiptno;
         $montharray = getmontharray($_SESSION["sppfrstmonth"],$_SESSION["sppfrstyear"],$_SESSION["sppnextmonth"],$_SESSION["sppnextyear"]);
         $bimbelmontharray = getmontharray($_SESSION["bimbelfrstmonth"],$_SESSION["bimbelfrstyear"],$_SESSION["bimbelnextmonth"],$_SESSION["bimbelnextyear"]);
