@@ -61,7 +61,7 @@
                 <tr>
                 <th colspan=2>Total</th>
                 <th class="number"><?php echo "Rp." . number_format($totspp);?></th>
-                <th class="number"><?php echo "Rp." . number_format($tothupsb);?></th>
+                <th class="number"><?php echo "Rp." . number_format($totdupsb);?></th>
                 <th class="number"><?php echo "Rp." . number_format($totbook);?></th>
                 <th class="number"><?php echo "Rp." . number_format($totbimbel);?></th>
                 </tr>
