@@ -38,7 +38,10 @@ class Receipt extends CI_Model{
         $sql.= "left outer join grades g on g.id=b.grade_id ";
         $sql.= "where a.id = '" . $id . "'";
         $que = $this->ci->db->query($sql);
+        if($que->num_rows()>0){
         return $que->result()[0];
+        }
+        return false;
     }
     function getreceiptdetails($receiptno){
         $sql = "select id,receiptno,description,amount from receiptdetails ";

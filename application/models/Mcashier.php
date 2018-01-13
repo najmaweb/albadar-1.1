@@ -153,7 +153,10 @@ class Mcashier extends CI_Model{
         $sql = "select nis,amount from students a left outer join sppgroups b on b.id=a.sppgroup_id where nis='".$nis."' ";
         $ci = & get_instance();
         $que = $ci->db->query($sql);
+        if($que->num_rows()>0){
         return $que->result()[0]->amount;
+        }
+        return false;
     }
     function getbimbelmaxyearmonth($nis){
         $sql = "select max(pyear)mpyear,max(pmonth)mpmonth from bimbel where nis='".$nis."'";

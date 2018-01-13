@@ -8,7 +8,10 @@ class Grade extends CI_Model{
         $sql.= "where id=".$id;
         $ci = & get_instance();
         $que = $ci->db->query($sql);
-        return $que->result()[0];
+        if($que->num_rows()>0){
+            return $que->result()[0];
+        }
+        return false;
     }
     function getgrades(){
         $this->load->model("Setting");

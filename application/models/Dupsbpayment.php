@@ -36,10 +36,13 @@ class Dupsbpayment extends CI_Model{
         $sql.= "and year='".$this->Setting->getcurrentyear()."' ";
         $que = $this->ci->db->query($sql);
         $res = $que->result();
-        if(is_null($res[0]->amount)){
-            return 0;
+        if($que->num_rows()>0){
+            if(is_null($res[0]->amount)){
+                return 0;
+            }
+            return $res[0]->amount;
         }
-        return $res[0]->amount;;
+        return false;
     }
     function getdupsbremain(){
         return $this->getdupsb() - $this->getdupsbpaid();

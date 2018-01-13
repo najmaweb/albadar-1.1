@@ -8,7 +8,10 @@ class Sppgroup extends CI_Model{
         $sql.= "where id=".$id;
         $ci = & get_instance();
         $que = $ci->db->query($sql);
+        if($que->num_rows()>0){
         return $que->result()[0];
+        }
+        return false;
     }
     function getsppgroups(){
         $sql = "select id,name,amount,description from sppgroups ";

@@ -78,11 +78,14 @@ class Spppayment extends CI_Model{
         $ci = & get_instance();
         $res = $ci->db->query($sql);
         $out = $res->result();
-        return array(
-            "maxyear"=>$out[0]->mpyear,
-            "maxmonth"=>$out[0]->mpmonth,
-            "status"=>$out[0]->paymentstatus,
-        );
+        if($res->num_rows()>0){
+            return array(
+                "maxyear"=>$out[0]->mpyear,
+                "maxmonth"=>$out[0]->mpmonth,
+                "status"=>$out[0]->paymentstatus,
+            );
+        }
+        return false;
     }
     function getsppremain($lastsppmonth=null,$lastsppyear=null){
         $lastspppayment = $this->getsppmaxyearmonth();

@@ -12,7 +12,10 @@ class Bimbelpayment extends CI_Model{
         $sql = "select name from students where nis='".$this->nis."'";
         $que = $this->ci->db->query($sql);
         $res = $que->result();
-        return $res[0]->name;
+        if($que->num_rows()>0){
+            return $res[0]->name;
+        }
+        return false;
     }
     function getinitmonthyear(){
         $sql = "select initmonth,inityear from students where nis='".$this->nis."'";

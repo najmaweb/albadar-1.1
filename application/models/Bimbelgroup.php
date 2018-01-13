@@ -8,7 +8,10 @@ class Bimbelgroup extends CI_Model{
         $sql.= "where id=".$id;
         $ci = & get_instance();
         $que = $ci->db->query($sql);
-        return $que->result()[0];
+        if($que->num_rows()>0){
+            return $que->result()[0];
+        }
+        return false;
     }
     function getbimbelgroups(){
         $sql = "select id,name,amount,description from bimbelgroups ";

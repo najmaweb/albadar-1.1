@@ -13,7 +13,10 @@ class Student extends CI_Model{
         $sql.= "where a.id=".$id;
         $ci = & get_instance();
         $que = $ci->db->query($sql);
+        if($que->num_rows()>0){
         return $que->result()[0];
+        }
+        return false;
     }
     function getStudents(){
         $sql = "select a.id,a.name,a.nis,a.description,b.name grade,";
@@ -92,7 +95,10 @@ class Student extends CI_Model{
         $ci = & get_instance();
         $que = $ci->db->query($sql);
         $res = $que->result();
+        if($que->num_rows()>0){
         return $res[0]->amount;
+        }
+        return false;
     }    
     function getbimbel($nis){
         $currentyear = $this->Setting->getcurrentyear();
@@ -103,7 +109,10 @@ class Student extends CI_Model{
         $ci = & get_instance();
         $que = $ci->db->query($sql);
         $res = $que->result();
+        if($que->num_rows()>0){
         return $res[0]->amount;
+        }
+        return false;
     }
     function getdupsb($nis){
         $currentyear = $this->Setting->getcurrentyear();
@@ -114,7 +123,10 @@ class Student extends CI_Model{
         $ci = & get_instance();
         $que = $ci->db->query($sql);
         $res = $que->result();
+        if($que->num_rows()>0){
         return $res[0]->amount;
+        }
+        return false;
     }
     function getbook($nis){
         $currentyear = $this->Setting->getcurrentyear();
@@ -125,6 +137,9 @@ class Student extends CI_Model{
         $ci = & get_instance();
         $que = $ci->db->query($sql);
         $res = $que->result();
+        if($que->num_rows()>0){
         return $res[0]->amount;
+        }
+        return false;
     }
 }
