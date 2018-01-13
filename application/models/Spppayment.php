@@ -28,7 +28,10 @@ class Spppayment extends CI_Model{
         $sql.= "where a.nis='".$this->nis."' and a.year=date_format(now(),'%Y')";
         $que = $this->ci->db->query($sql);
         $res = $que->result();
-        return $res[0]->amount;
+        if($que->num_rows()>0){
+            return $res[0]->amount;
+        }
+        return false;
     }
     function getcurrmonthsppbill(){
         $sql = "select amount from spp where nis='".$this->nis."'";
