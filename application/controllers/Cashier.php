@@ -137,7 +137,7 @@ class Cashier extends CI_Controller{
         $payment = new Spppayment($nis);
         $sppmaxyearmonth = $this->Spppayment->getsppmaxyearmonth();
         
-        if($_SESSION["withspp"]){
+        if(array_key_exists('withspp',$_SESSION)){
             $sppremain = $payment->getsppremain($_SESSION["sppnextmonth"],$_SESSION["sppnextyear"]);
         }else{
             $sppremain = $payment->getsppremain();
