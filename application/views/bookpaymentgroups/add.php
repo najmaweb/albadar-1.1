@@ -41,6 +41,13 @@
                                                     <input type="text" id="inputWarning" name="amount" class="form-control" value="">
                                                 </div>
                                             </div>
+                                            <div class="form-group">
+                                                <label class="col-lg-4 control-label" for="date01">Date input</label>
+                                                <div class="col-lg-8">
+                                                    <input type="text" class="form-control datepicker" id="date01" value="<?php echo date("d/m/Y");?>">
+                                                    <p class="help-block">Tanggal mulai ditagihkan.</p>
+                                                </div>
+                                            </div>
                                             <div class="form-group has-success">
                                                 <label class="col-lg-4 control-label" for="selectError">Keterangan</label>
                                                 <div class="col-lg-8">
@@ -65,6 +72,7 @@
 
         <script type="text/javascript" src="/assets/js/autocomplete/jquery-1.8.2.min.js"></script>
         <script type="text/javascript" src="/assets/js/autocomplete/jquery.autocomplete.js"></script>
+        <script type="text/javascript" src="/assets/vendors/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
         <script type="text/javascript">
                 var bts = [{"value":"170001-Ahmad Trianto (5c)","data":1},{"value":"170002-Irfan Hakim (5b)","data":2},{"value":"170003-Irwan Maulana (4d)","data":3}];
 
@@ -82,6 +90,9 @@
                     onInvalidateSelection: function() {
                         //$('#selction-bts').html('You selected: none');
                     }
+                });
+                $('.datepicker').datepicker({
+                    format:'dd/mm/yyyy'
                 });
         </script>
         <script>
